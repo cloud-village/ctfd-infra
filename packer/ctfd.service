@@ -12,6 +12,7 @@ ExecStart=/opt/CTFd-2.5.0/bin/gunicorn --bind 0.0.0.0:8000 -w 4 "CTFd:create_app
 ExecReload=/bin/kill -s HUP $MAINPID
 KillMode=mixed
 PrivateTmp=true
+Restart=always
 
 [Install]
 WantedBy=multi-user.target
