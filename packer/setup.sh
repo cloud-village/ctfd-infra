@@ -26,13 +26,14 @@ sudo chown -R ctfd.ctfd /opt/CTFd-2.5.0
 # install python deps
 sudo su ctfd -c "pip install virtualenv"
 sudo su ctfd -c "virtualenv /opt/CTFd-2.5.0"
-sudo su ctfd -c "source /opt/CTFd-2.5.0/bin/activate && pip install -r /opt/CTFd-2.5.0/requirements.txt"
+sudo su ctfd -c "/opt/CTFd-2.5.0/bin/pip install -r /opt/CTFd-2.5.0/requirements.txt"
 
 # copy systemd unit
 cp /vagrant/ctfd.service /etc/systemd/system/ctfd.service
 
-# enable ctfd unit
-sudo systemctl enable ctfd.service
-
 # reload systemd
 sudo systemctl daemon-reload
+
+# enable and start ctfd
+sudo systemctl enable ctfd.service
+sudo systemctl start ctfd.service
