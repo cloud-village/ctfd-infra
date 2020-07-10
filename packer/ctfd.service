@@ -1,0 +1,17 @@
+# /etc/systemd/system/ctfd.service
+[Unit]
+Description=CTFd daemon
+After=network.target
+
+[Service]
+User=ctfd
+Group=ctfd
+RuntimeDirectory=ctfd
+WorkingDirectory=/opt/CTFd-2.5.0
+ExecStart=/usr/local/bin/gunicorn --bind 0.0.0.0:8000 -w 4 "CTFd:create_app()"
+ExecReload=/bin/kill -s HUP $MAINPID
+KillMode=mixed
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target
