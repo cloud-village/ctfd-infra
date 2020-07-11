@@ -40,8 +40,6 @@ resource "aws_launch_template" "ctfd" {
     availability_zone = var.availability_zone
   }
 
-  ram_disk_id = "test"
-
   vpc_security_group_ids = [var.vpc_security_group_ids]
 
   tag_specifications {
