@@ -16,6 +16,11 @@ variable "max_size" {
 }
 
 variable "launch_template_id" {
-  type = string
+  type        = string
   description = "launch template id to use for the autoscaling group"
+}
+
+variable "target_group_arns" {
+  type        = string
+  description = "ARN of load balancer target group this autoscaling group is managing the nodes for"
 }

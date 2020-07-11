@@ -8,4 +8,6 @@ resource "aws_autoscaling_group" "ctfd-asg" {
     id      = var.launch_template_id
     version = "$Latest"
   }
+  health_check_type = "ELB"
+  target_group_arns = var.target_group_arns
 }
