@@ -29,7 +29,7 @@ sudo su ctfd -c "virtualenv /opt/CTFd-2.5.0"
 sudo su ctfd -c "/opt/CTFd-2.5.0/bin/pip install -r /opt/CTFd-2.5.0/requirements.txt"
 
 # copy systemd unit
-cp /vagrant/ctfd.service /etc/systemd/system/ctfd.service
+sudo cp /tmp/ctfd.service /etc/systemd/system/ctfd.service
 
 # reload systemd
 sudo systemctl daemon-reload
