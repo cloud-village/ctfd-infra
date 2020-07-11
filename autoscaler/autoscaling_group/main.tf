@@ -1,4 +1,4 @@
-resource "aws_autoscaling_group" "ctfd-asg" {
+resource "aws_autoscaling_group" "ctfd_asg" {
   availability_zones = var.availability_zones
   desired_capacity   = max(length(var.availability_zones), var.desired_capacity)
   max_size           = var.max_size

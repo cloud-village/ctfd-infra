@@ -21,7 +21,7 @@ resource "aws_lb_target_group" "ctfd_target_group" {
   vpc_id   = var.vpc_id
 }
 
-resource "aws_lb_listener" "front_end" {
+resource "aws_lb_listener" "https_forward" {
   load_balancer_arn = aws_lb.ctfd_alb.arn
   port              = "443"
   protocol          = "HTTPS"
@@ -34,7 +34,7 @@ resource "aws_lb_listener" "front_end" {
   }
 }
 
-resource "aws_lb_listener" "https_redirect" {
+resource "aws_lb_listener" "redirect_http_to_https" {
   load_balancer_arn = aws_lb.ctfd_alb.arn
   port              = "80"
   protocol          = "HTTP"
