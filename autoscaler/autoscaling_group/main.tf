@@ -5,8 +5,7 @@ resource "aws_autoscaling_group" "ctfd-asg" {
   min_size           = length(var.availability_zones)
 
   launch_template {
-    #id      = aws_launch_template.ctfd.id #FIXME how do we get the id?
-    id      = "lt-this1" #FIXME this is in place to pass terraform validate
+    id      = var.launch_template_id
     version = "$Latest"
   }
 }

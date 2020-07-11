@@ -15,3 +15,7 @@ variable "max_size" {
   default     = 10
 }
 
+variable "launch_template_id" {
+  type = string
+  description = "launch template id to use for the autoscaling group"
+}
