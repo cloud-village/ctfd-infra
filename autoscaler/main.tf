@@ -20,4 +20,5 @@ module "ctfd_alb" {
   alb_logs_bucket_name = "" #TK
   vpc_id               = "" #TK
   certificate_arn      = "" #TK
+  instance_sg_id       = module.ctfd_autoscaling_group.instance_sg.id
 }

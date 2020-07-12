@@ -65,10 +65,10 @@ resource "aws_security_group" "inbound_from_alb" {
 
   ingress {
     description     = "inbound from alb"
-    from_port       = 443
-    to_port         = 443
+    from_port       = 8000
+    to_port         = 8000
     protocol        = "tcp"
-    security_groups = [var.alb_security_group_name]
+    self            = true
   }
 
   egress {

@@ -17,7 +17,12 @@ variable "availability_zone" {
   type        = string
 }
 
-variable "vpc_security_group_ids" {
-  description = "comma-delimited list of security groups"
+variable "vpc_id" {
+  description = "id for the vpc the security group rules and nodes live in"
   type        = string
+}
+
+variable "alb_security_group_name" {
+  type = string
+  description = "name of security group used by the "
 }

@@ -17,3 +17,8 @@ variable "certificate_arn" {
   type        = string
   description = "ARN for the SSL certificate used by the ALB"
 }
+
+variable "instance_sg_id" {
+  type = string
+  description = "security group id that allows traffic between ALB and nodes"
+}

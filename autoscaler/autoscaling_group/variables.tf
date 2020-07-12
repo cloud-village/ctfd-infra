@@ -21,6 +21,6 @@ variable "launch_template_id" {
 }
 
 variable "target_group_arns" {
-  type        = string
+  type        = list(string)
   description = "ARN of load balancer target group this autoscaling group is managing the nodes for"
 }
