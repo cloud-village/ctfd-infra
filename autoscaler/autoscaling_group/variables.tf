@@ -24,3 +24,15 @@ variable "target_group_arns" {
   type        = list(string)
   description = "ARN of load balancer target group this autoscaling group is managing the nodes for"
 }
+
+variable "scale_up_threshold" {
+  type = number
+  description = "percentage of CPU to trigger scale up"
+  default = 80
+}
+
+variable "scale_down_threshold" {
+  type = number
+  description = "percentage of CPU to trigger scale down"
+  default = 50
+}
