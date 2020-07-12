@@ -7,6 +7,7 @@ variable "image_id" {
   description = "ami id to be used by the launch template"
   type        = string
 }
+
 variable "key_name" {
   description = "name of ec2 keypair"
   type        = string
@@ -22,7 +23,3 @@ variable "vpc_id" {
   type        = string
 }
 
-variable "alb_security_group_name" {
-  type        = string
-  description = "name of security group used by the "
-}

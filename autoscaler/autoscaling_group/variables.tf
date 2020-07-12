@@ -1,6 +1,7 @@
 variable "availability_zones" {
   type        = list(string)
   description = "availability zones for autoscaling group"
+  default     = ["us-east-2a", "us-east-2b", "us-east-2c"]
 }
 
 variable "desired_capacity" {
@@ -21,18 +22,18 @@ variable "launch_template_id" {
 }
 
 variable "target_group_arns" {
-  type        = list(string)
+  type        = string
   description = "ARN of load balancer target group this autoscaling group is managing the nodes for"
 }
 
 variable "scale_up_threshold" {
-  type = number
+  type        = number
   description = "percentage of CPU to trigger scale up"
-  default = 80
+  default     = 80
 }
 
 variable "scale_down_threshold" {
-  type = number
+  type        = number
   description = "percentage of CPU to trigger scale down"
-  default = 50
+  default     = 50
 }

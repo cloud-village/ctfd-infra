@@ -13,6 +13,9 @@ resource "aws_lb_target_group" "ctfd_target_group" {
   port     = 8000
   protocol = "HTTP"
   vpc_id   = var.vpc_id
+  health_check {
+    matcher = "200-399"
+  }
 }
 
 resource "aws_lb_listener" "https_forward" {
@@ -24,7 +27,7 @@ resource "aws_lb_listener" "https_forward" {
 
   default_action {
     type             = "forward"
-    target_group_arn = aws_lb_target_group.ctfd_target_group
+    target_group_arn = aws_lb_target_group.ctfd_target_group.arn
   }
 }
 
@@ -50,12 +53,21 @@ resource "aws_security_group" "allow_tls" {
   vpc_id      = var.vpc_id
 
   ingress {
-    description = "TLS from VPC"
+    description = "HTTPS from public internet"
     from_port   = 443
     to_port     = 443
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
+
+  ingress {
+    description = "HTTP from public internet"
+    from_port   = 80
+    to_port     = 80
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
 
   egress {
     from_port   = 0
