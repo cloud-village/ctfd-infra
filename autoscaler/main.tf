@@ -27,3 +27,8 @@ module "logs_bucket" {
   source = "./logs_bucket"
   name   = "" # TK
 }
+
+module "iam_profile" {
+  source = "./iam"
+  logs_bucket_name = module.logs_bucket.logs_bucket.id
+}
