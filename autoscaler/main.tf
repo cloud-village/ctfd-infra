@@ -17,8 +17,13 @@ module "ctfd_autoscaling_group" {
 module "ctfd_alb" {
   source               = "./alb"
   subnets              = "" #TK
-  alb_logs_bucket_name = "" #TK
+  alb_logs_bucket_name = module.logs_bucket.logs_bucket.id
   vpc_id               = "" #TK
   certificate_arn      = "" #TK
   instance_sg_id       = module.ctfd_autoscaling_group.instance_sg.id
+}
+
+module "logs_bucket" {
+  source = "./logs_bucket"
+  name   = "" # TK
 }
