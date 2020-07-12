@@ -31,3 +31,10 @@ module "s3_uploads" {
   source = "./s3_uploads"
   uploads_bucket_name = "" #TK
 }
+
+module "dns" {
+  source = "./dns"
+  zone_id = "" #TK
+  alb_dns_name = module.ctfd_alb.ctfd_alb.dns_name
+  alb_zone_id = module.ctfd_alb.ctfd_alb.zone_id
+}
