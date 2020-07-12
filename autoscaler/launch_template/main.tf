@@ -64,11 +64,11 @@ resource "aws_security_group" "inbound_from_alb" {
   vpc_id      = var.vpc_id
 
   ingress {
-    description     = "inbound from alb"
-    from_port       = 8000
-    to_port         = 8000
-    protocol        = "tcp"
-    self            = true
+    description = "inbound from alb"
+    from_port   = 8000
+    to_port     = 8000
+    protocol    = "tcp"
+    self        = true
   }
 
   egress {

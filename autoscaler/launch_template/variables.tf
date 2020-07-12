@@ -23,6 +23,6 @@ variable "vpc_id" {
 }
 
 variable "alb_security_group_name" {
-  type = string
+  type        = string
   description = "name of security group used by the "
 }
