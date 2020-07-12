@@ -24,7 +24,7 @@ module "ctfd_alb" {
 
 module "iam_profile" {
   source = "./iam"
-  logs_bucket_name = module.logs_bucket.logs_bucket.id
+  uploads_bucket_name = module.s3_uploads.uploads_bucket.id
 }
 
 module "s3_uploads" {

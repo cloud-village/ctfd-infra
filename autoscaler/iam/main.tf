@@ -1,5 +1,5 @@
 resource "aws_iam_role" "role" {
-  name = "ctfd-alb-logging-role"
+  name = "ctfd-uploads-role"
 
   assume_role_policy = <<EOF
     {
@@ -19,8 +19,8 @@ EOF
 }
 
 resource "aws_iam_policy" "policy" {
-  name        = "write-alb-logs"
-  description = "write alb logs to s3"
+  name        = "ctfd-uploads"
+  description = "save uploads in s3"
 
   policy = <<EOF
 {
@@ -32,8 +32,8 @@ resource "aws_iam_policy" "policy" {
       ],
       "Effect": "Allow",
       "Resource": [
-        "arn:aws:s3:::${var.logs_bucket_name}",
-        "arn:aws:s3:::${var.logs_bucket_name}/*"
+        "arn:aws:s3:::${var.uploads_bucket_name}",
+        "arn:aws:s3:::${var.uploads_bucket_name}/*"
       ]
     }
   ]
@@ -47,6 +47,6 @@ resource "aws_iam_role_policy_attachment" "attach" {
 }
 
 resource "aws_iam_instance_profile" "profile" {
-  name = "ctfd-alb-logging-profile"
+  name = "ctfd-uploads-profile"
   role = aws_iam_role.role.name
 }
