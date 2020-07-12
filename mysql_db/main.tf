@@ -20,7 +20,7 @@ resource "aws_rds_cluster_instance" "cluster_instances" {
   count              = length(var.availability_zones)
   identifier         = "ctfd-db-${count.index}"
   cluster_identifier = aws_rds_cluster.default.id
-  instance_class     = "db.r4.large"
+  instance_class     = "db.t3.medium"
   engine             = aws_rds_cluster.default.engine
   engine_version     = aws_rds_cluster.default.engine_version
 }
