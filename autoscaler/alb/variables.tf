@@ -1,8 +1,3 @@
-variable "security_groups" {
-  type        = list(string)
-  description = "security groups that the ALB should accept traffic from"
-}
-
 variable "subnets" {
   type        = list(string)
   description = "subnet ids the ALB should live in"
