@@ -44,7 +44,7 @@ resource "aws_launch_template" "ctfd" {
     availability_zone = var.availability_zone
   }
 
-  vpc_security_group_ids = [ aws_security_group.inbound_from_alb.id, aws_security_group.admin.id ]
+  vpc_security_group_ids = [aws_security_group.inbound_from_alb.id, aws_security_group.admin.id]
 
   tag_specifications {
     resource_type = "instance"
@@ -64,11 +64,11 @@ resource "aws_security_group" "inbound_from_alb" {
   vpc_id      = var.vpc_id
 
   ingress {
-    description = "inbound from alb"
-    from_port   = 443
-    to_port     = 443
-    protocol    = "tcp"
-    security_groups = [ var.alb_security_group_name ]
+    description     = "inbound from alb"
+    from_port       = 443
+    to_port         = 443
+    protocol        = "tcp"
+    security_groups = [var.alb_security_group_name]
   }
 
   egress {
