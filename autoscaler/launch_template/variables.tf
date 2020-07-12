@@ -16,6 +16,7 @@ variable "key_name" {
 variable "availability_zone" {
   description = "availability zone"
   type        = string
+  default     = "us-east-2"
 }
 
 variable "vpc_id" {

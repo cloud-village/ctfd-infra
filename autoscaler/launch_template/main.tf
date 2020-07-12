@@ -53,8 +53,6 @@ resource "aws_launch_template" "ctfd" {
       Name = "ctfd"
     }
   }
-
-  user_data = filebase64("${path.module}/../../packer/setup.sh") #FIXME use better path management
 }
 
 
