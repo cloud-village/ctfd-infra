@@ -1,3 +1,7 @@
+data "http" "myip" {
+  url = "http://ifconfig.me"
+}
+
 resource "aws_launch_template" "ctfd" {
   name = "ctfd-template"
 
@@ -40,7 +44,7 @@ resource "aws_launch_template" "ctfd" {
     availability_zone = var.availability_zone
   }
 
-  vpc_security_group_ids = [var.vpc_security_group_ids]
+  vpc_security_group_ids = [ aws_security_group.inbound_from_alb.id, aws_security_group.admin.id ]
 
   tag_specifications {
     resource_type = "instance"
@@ -51,5 +55,57 @@ resource "aws_launch_template" "ctfd" {
   }
 
   user_data = filebase64("${path.module}/../../packer/setup.sh") #FIXME use better path management
+}
+
+
+resource "aws_security_group" "inbound_from_alb" {
+  name        = "inbound_from_alb"
+  description = "Allow inbound traffic from the ALB"
+  vpc_id      = var.vpc_id
+
+  ingress {
+    description = "inbound from alb"
+    from_port   = 443
+    to_port     = 443
+    protocol    = "tcp"
+    security_groups = [ var.alb_security_group_name ]
+  }
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  tags = {
+    Name = "inbound_from_alb"
+  }
+}
+
+
+resource "aws_security_group" "admin" {
+  name        = "inbound_for_admin"
+  description = "Allow inbound ssh for admin"
+  vpc_id      = var.vpc_id
+
+  ingress {
+    description = "inbound from alb"
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["${chomp(data.http.myip.body)}/32"]
+  }
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  tags = {
+    Name = "inbound_for_admin"
+  }
 }
 
