@@ -3,7 +3,6 @@ module "ctfd_launch_template" {
   iam_instance_profile_name = "" #TK
   image_id  = "" #TK
   availability_zone = "" #TK
-  vpc_security_group_ids = "" #TK
 }
 
 module "ctfd_autoscaling_group" {
@@ -17,7 +16,6 @@ module "ctfd_autoscaling_group" {
 
 module "ctfd_alb" {
   source = "./alb"
-  security_groups = "" #TK
   subnets = "" #TK
   alb_logs_bucket_name = "" #TK
   vpc_id = "" #TK
