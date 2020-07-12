@@ -6,12 +6,6 @@ resource "aws_lb" "ctfd_alb" {
   subnets            = var.subnets
 
   enable_deletion_protection = false
-
-  access_logs {
-    bucket  = var.alb_logs_bucket_name
-    prefix  = "ctfd-alb"
-    enabled = true
-  }
 }
 
 resource "aws_lb_target_group" "ctfd_target_group" {
