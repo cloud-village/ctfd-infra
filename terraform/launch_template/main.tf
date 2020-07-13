@@ -53,6 +53,8 @@ resource "aws_launch_template" "ctfd" {
       Name = "ctfd"
     }
   }
+
+  user_data = filebase64("${path.module}/config_updates.sh")
 }
 
 
@@ -107,3 +109,16 @@ resource "aws_security_group" "admin" {
   }
 }
 
+
+resource "random_string" "ctfd_key" {
+  length = 32
+  special = true
+  override_special = "/@£$"
+}
+
+resource "aws_ssm_parameter" "secret" {
+  name        = "ctfd_key"
+  description = "secret key for ctfd"
+  type        = "SecureString"
+  value       = random_string.ctfd_key.result
+}

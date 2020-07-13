@@ -1,4 +1,4 @@
-resource "random_string" "random" {
+resource "random_password" "random" {
   length = 22
   lifecycle {
     ignore_changes = all
@@ -10,9 +10,9 @@ resource "aws_rds_cluster" "default" {
   engine                  = "aurora-mysql"
   engine_version          = "5.7.mysql_aurora.2.03.2"
   availability_zones      = var.availability_zones
-  database_name           = "ctfddb"
+  database_name           = "ctfd"
   master_username         = "ctfd"
-  master_password         = random_string.random.result
+  master_password         = random_password.random.result
   backup_retention_period = 5
   copy_tags_to_snapshot   = true
   preferred_backup_window = "07:00-09:00"
@@ -54,3 +54,16 @@ resource "aws_security_group" "allow_mysql" {
   }
 }
 
+resource "aws_ssm_parameter" "secret" {
+  name        = "/database/password"
+  description = "mysql password"
+  type        = "SecureString"
+  value       = random_password.random.result
+}
+
+resource "aws_ssm_parameter" "db_url" {
+  name        = "/database/url"
+  description = "mysql url"
+  type        = "String"
+  value       = aws_rds_cluster.default.endpoint
+}
