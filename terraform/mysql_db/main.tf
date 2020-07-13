@@ -1,5 +1,8 @@
 resource "random_string" "random" {
   length = 22
+  lifecycle {
+    ignore_changes = all
+  }
 }
 
 resource "aws_rds_cluster" "default" {
@@ -14,7 +17,7 @@ resource "aws_rds_cluster" "default" {
   copy_tags_to_snapshot   = true
   preferred_backup_window = "07:00-09:00"
   skip_final_snapshot     = true
-  vpc_security_group_ids  = aws_security_group.allow_mysql.id
+  vpc_security_group_ids  = [aws_security_group.allow_mysql.id]
 }
 
 resource "aws_rds_cluster_instance" "cluster_instances" {
@@ -32,11 +35,11 @@ resource "aws_security_group" "allow_mysql" {
   vpc_id      = var.vpc_id
 
   ingress {
-    description     = "mysql"
-    from_port       = 3306
-    to_port         = 3306
-    protocol        = "tcp"
-    security_groups = self
+    description = "mysql"
+    from_port   = 3306
+    to_port     = 3306
+    protocol    = "tcp"
+    self        = true
   }
 
   egress {
