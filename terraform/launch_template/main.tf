@@ -32,7 +32,7 @@ resource "aws_launch_template" "ctfd" {
     market_type = "spot"
   }
 
-  instance_type = "t3.micro"
+  instance_type = var.instance_type
 
   key_name = var.key_name
 
@@ -44,7 +44,7 @@ resource "aws_launch_template" "ctfd" {
     availability_zone = var.availability_zone
   }
 
-  vpc_security_group_ids = [aws_security_group.inbound_from_alb.id, aws_security_group.admin.id]
+  vpc_security_group_ids = [aws_security_group.inbound_from_alb.id, aws_security_group.admin.id, var.db_security_group]
 
   tag_specifications {
     resource_type = "instance"

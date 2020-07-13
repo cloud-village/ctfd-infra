@@ -24,3 +24,13 @@ variable "vpc_id" {
   type        = string
 }
 
+variable "instance_type" {
+  type        = string
+  description = "type of ec2 instances to use, defaults to t3.medium"
+  default     = "t3.medium"
+}
+
+variable "db_security_group" {
+  description = "security group to allow nodes in the ASG to talk to the database"
+  type        = string
+}
