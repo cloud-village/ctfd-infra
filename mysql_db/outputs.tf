@@ -10,3 +10,7 @@ output "pass" {
   value     = random_string.random
   sensitive = true
 }
+
+outut "db_security_group" {
+  value = aws_security_group.allow_mysql
+}
