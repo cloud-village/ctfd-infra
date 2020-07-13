@@ -20,7 +20,7 @@ variable "vpc_id" {
 
 
 variable "availability_zones" {
-  type        = string
+  type        = list(string)
   description = "availability zones where things will live"
 }
 
@@ -35,7 +35,7 @@ variable "desired_capacity" {
   default     = 2
 }
 
-variable "subnets" {
+variable "alb_subnets" {
   type        = list(string)
   description = "subnet ids the ALB should live in"
 }
@@ -50,7 +50,7 @@ variable "uploads_bucket_name" {
   type        = string
 }
 
-variable "zone_id" {
+variable "route53_zone_id" {
   type        = string
   description = "hosted zone id"
 }

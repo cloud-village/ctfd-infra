@@ -5,7 +5,7 @@ module "ctfd_launch_template" {
   availability_zone         = var.template_az
   key_name                  = var.key_name
   vpc_id                    = var.vpc_id
-  db_security_group         = module.mysql.db_security_group.id
+  db_security_group         = module.mysql_db.db_security_group.id
 }
 
 module "ctfd_autoscaling_group" {
@@ -22,7 +22,7 @@ module "ctfd_alb" {
   subnets         = var.alb_subnets
   vpc_id          = var.vpc_id
   certificate_arn = var.certificate_arn
-  instance_sg_id  = module.ctfd_autoscaling_group.instance_sg.id
+  instance_sg_id  = module.ctfd_launch_template.instance_sg.id
 }
 
 module "iam_profile" {

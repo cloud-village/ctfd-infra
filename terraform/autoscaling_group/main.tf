@@ -25,7 +25,7 @@ resource "aws_autoscaling_policy" "scale_up" {
 }
 
 resource "aws_cloudwatch_metric_alarm" "ctfd_high_cpu" {
-  alarm_name          = "ctfd-high-cpu"
+  alarm_name          = "ctfd_high_cpu"
   comparison_operator = "GreaterThanOrEqualToThreshold"
   evaluation_periods  = "2"
   metric_name         = "CPUUtilization"
@@ -51,7 +51,7 @@ resource "aws_autoscaling_policy" "scale_down" {
 }
 
 resource "aws_cloudwatch_metric_alarm" "ctfd_low_cpu" {
-  alarm_name          = "ctfd-high-cpu"
+  alarm_name          = "ctfd_low_cpu"
   comparison_operator = "LessThanThreshold"
   evaluation_periods  = "2"
   metric_name         = "CPUUtilization"
