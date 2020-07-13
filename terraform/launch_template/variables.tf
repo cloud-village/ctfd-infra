@@ -34,3 +34,8 @@ variable "db_security_group" {
   description = "security group to allow nodes in the ASG to talk to the database"
   type        = string
 }
+
+variable "redis_security_group" {
+  description = "security group to allow nodes in the ASG to talk to redis"
+  type        = string
+}

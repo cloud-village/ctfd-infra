@@ -6,6 +6,7 @@ module "ctfd_launch_template" {
   key_name                  = var.key_name
   vpc_id                    = var.vpc_id
   db_security_group         = module.mysql_db.db_security_group.id
+  redis_security_group      = module.redis.redis_sg.id
 }
 
 module "ctfd_autoscaling_group" {
@@ -46,4 +47,10 @@ module "mysql_db" {
   source             = "./mysql_db"
   availability_zones = var.availability_zones
   vpc_id             = var.vpc_id
+}
+
+module "redis" {
+  source    = "./redis"
+  node_type = var.redis_node_type
+  vpc_id    = var.vpc_id
 }

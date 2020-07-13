@@ -55,3 +55,7 @@ variable "route53_zone_id" {
   description = "hosted zone id"
 }
 
+variable "redis_node_type" {
+  type        = string
+  description = "type of nodes to use for redis"
+}
