@@ -19,8 +19,8 @@ EOF
 }
 
 resource "aws_iam_policy" "policy" {
-  name        = "ctfd-uploads"
-  description = "save uploads in s3"
+  name        = "ctfd-access"
+  description = "access policy for ctfd"
 
   policy = <<EOF
 {
@@ -35,8 +35,13 @@ resource "aws_iam_policy" "policy" {
         "arn:aws:s3:::${var.uploads_bucket_name}",
         "arn:aws:s3:::${var.uploads_bucket_name}/*"
       ]
-    }
-  ]
+    },
+    {   
+      "Action": [
+        "ssm:GetParameter"
+      ],  
+      "Effect": "Allow",
+      "Resource": "arn:aws:ssm:${var.region}:${var.account_id}:parameter/ctfd/*"
 }
 EOF
 }
