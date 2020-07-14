@@ -1,3 +1,5 @@
+data "aws_caller_identity" "current" {}
+
 resource "aws_iam_role" "role" {
   name = "ctfd-uploads-role"
 
@@ -41,7 +43,7 @@ resource "aws_iam_policy" "policy" {
         "ssm:GetParameter"
       ],  
       "Effect": "Allow",
-      "Resource": "arn:aws:ssm:${var.region}:${var.account_id}:parameter/ctfd/*"
+      "Resource": "arn:aws:ssm:${var.region}:${data.aws_caller_identity.current.account_id}:parameter/ctfd/*"
 }
 EOF
 }
