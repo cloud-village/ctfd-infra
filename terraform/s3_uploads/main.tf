@@ -15,7 +15,7 @@ resource "aws_s3_bucket_public_access_block" "example" {
 }
 
 resource "aws_ssm_parameter" "bucket_name" {
-  name  = "s3_bucket_name"
+  name  = "/ctfd/s3/bucket_name"
   type  = "String"
   value = aws_s3_bucket.uploads_bucket.id
 }

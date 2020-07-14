@@ -117,7 +117,7 @@ resource "random_string" "ctfd_key" {
 }
 
 resource "aws_ssm_parameter" "secret" {
-  name        = "ctfd_key"
+  name        = "/ctfd/app_key"
   description = "secret key for ctfd"
   type        = "SecureString"
   value       = random_string.ctfd_key.result

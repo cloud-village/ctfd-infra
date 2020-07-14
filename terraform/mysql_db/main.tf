@@ -55,14 +55,14 @@ resource "aws_security_group" "allow_mysql" {
 }
 
 resource "aws_ssm_parameter" "secret" {
-  name        = "/database/password"
+  name        = "/ctfd/database/password"
   description = "mysql password"
   type        = "SecureString"
   value       = random_password.random.result
 }
 
 resource "aws_ssm_parameter" "db_url" {
-  name        = "/database/url"
+  name        = "/ctfd/database/url"
   description = "mysql url"
   type        = "String"
   value       = aws_rds_cluster.default.endpoint

@@ -7,15 +7,16 @@ pip install -U awscli
 # get the values from SSM
 DB_PASS=$(aws ssm get-parameter \
     --with-decryption \
-    --name "/database/password" | jq -r .Parameter.Value)
+    --name "/ctfd/database/password" | jq -r .Parameter.Value)
 DB_URL=$(aws ssm get-parameter \
-    --name "/database/url" | jq -r .Parameter.Value)
+    --name "/ctfd/database/url" | jq -r .Parameter.Value)
 REDIS_URL=$(aws ssm get-parameter \
-    --name "redis" | jq -r .Parameter.Value)
+    --name "/ctfd/redis/url" | jq -r .Parameter.Value)
 AWS_S3_BUCKET=$(aws ssm get-parameter \
-    --name "upload_bucket_name" | jq -r .Parameter.Value)
+    --name "/ctfd/s3/bucket_name" | jq -r .Parameter.Value)
 CTFD_KEY=$(aws ssm get-parameter \
-    --name "ctfd_key" | jq -r .Parameter.Value)
+    --with-decryption \
+    --name "/ctfd/app_key" | jq -r .Parameter.Value)
 
 # update the secret key
 echo $CTFD_KEY > /opt/CTFd-2.5.0/.ctfd_secret_key
