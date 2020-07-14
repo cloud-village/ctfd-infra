@@ -13,6 +13,12 @@ ExecReload=/bin/kill -s HUP $MAINPID
 KillMode=mixed
 PrivateTmp=true
 Restart=always
+Environment=DATABASE_URL=""
+Environment=CACHE_TYPE=""
+Environment=REDIS_URL=""
+Environment=UPLOAD_PROVIDER=""
+Environment=AWS_S3_BUCKET=""
+
 
 [Install]
 WantedBy=multi-user.target
