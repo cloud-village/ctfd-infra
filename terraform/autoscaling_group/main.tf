@@ -1,9 +1,9 @@
 resource "aws_autoscaling_group" "ctfd_asg" {
   name               = "ctfd_asg"
   availability_zones = var.availability_zones
-  desired_capacity   = max(length(var.availability_zones), var.desired_capacity)
-  max_size           = var.max_size
-  min_size           = length(var.availability_zones)
+  desired_capacity   = 1
+  max_size           = 1
+  min_size           = 1
 
   launch_template {
     id      = var.launch_template_id
