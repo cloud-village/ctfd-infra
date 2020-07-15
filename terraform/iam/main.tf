@@ -43,7 +43,13 @@ resource "aws_iam_policy" "policy" {
         "ssm:GetParameter"
       ],  
       "Effect": "Allow",
-      "Resource": "arn:aws:ssm:${var.region}:${data.aws_caller_identity.current.account_id}:parameter/ctfd/*"
+      "Resource": [
+        "arn:aws:ssm:${var.region}:${data.aws_caller_identity.current.account_id}:parameter/ctfd/app_key",
+        "arn:aws:ssm:${var.region}:${data.aws_caller_identity.current.account_id}:parameter/ctfd/database/password",
+        "arn:aws:ssm:${var.region}:${data.aws_caller_identity.current.account_id}:parameter/ctfd/database/url",
+        "arn:aws:ssm:${var.region}:${data.aws_caller_identity.current.account_id}:parameter/ctfd/redis/url",
+        "arn:aws:ssm:${var.region}:${data.aws_caller_identity.current.account_id}:parameter/ctfd/s3/bucket_name"
+      ]
     }
   ]
 }
