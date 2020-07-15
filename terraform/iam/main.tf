@@ -44,6 +44,8 @@ resource "aws_iam_policy" "policy" {
       ],  
       "Effect": "Allow",
       "Resource": "arn:aws:ssm:${var.region}:${data.aws_caller_identity.current.account_id}:parameter/ctfd/*"
+    }
+  ]
 }
 EOF
 }
