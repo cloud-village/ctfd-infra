@@ -61,7 +61,7 @@ variable "redis_node_type" {
 }
 
 variable "region" {
-  type = string
+  type        = string
   description = "aws region the resources will be created in"
 }
 

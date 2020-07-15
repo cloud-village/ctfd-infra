@@ -7,7 +7,7 @@ output "db_instances" {
 }
 
 output "pass" {
-  value     = random_password.random
+  value = random_password.random
 }
 
 output "db_security_group" {

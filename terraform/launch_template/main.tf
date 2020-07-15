@@ -111,8 +111,8 @@ resource "aws_security_group" "admin" {
 
 
 resource "random_string" "ctfd_key" {
-  length = 32
-  special = true
+  length           = 32
+  special          = true
   override_special = "/@£$"
 }
 
