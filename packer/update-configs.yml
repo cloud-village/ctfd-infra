@@ -1,0 +1,24 @@
+# update configs on localhost
+---
+- hosts: localhost
+  become: yes
+  gather_facts: no
+  tasks:
+    - name: render ctfd.service
+      template:
+        src: /tmp/ctfd.service.j2
+        dest: /etc/systemd/system/ctfd.service
+      vars:
+        DB_PASS: "{{ lookup('aws_ssm', '/ctfd/database/password', region='us-east-2', decrypt=True ) }}"
+        DB_URL: "{{ lookup('aws_ssm', '/ctfd/database/url', region='us-east-2' ) }}"
+        REDIS_URL: "{{ lookup('aws_ssm', '/ctfd/redis/url', region='us-east-2' ) }}"
+        AWS_S3_BUCKET: "{{ lookup('aws_ssm', '/ctfd/s3/bucket_name', region='us-east-2' ) }}"
+    - name: render .ctfd_secret_key
+      copy:
+        content: "{{ lookup('aws_ssm', '/ctfd/app_key', region='us-east-2', decrypt=True ) }}"
+
+    - name: restart ctfd.service
+      systemd:
+        state: restarted
+        daemon_reload: yes
+        name: ctfd.service

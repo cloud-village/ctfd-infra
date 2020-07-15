@@ -13,7 +13,7 @@ sudo DEBIAN_FRONTEND=noninteractive apt-get install -y \
 	zip
 
 # install pip deps
-pip install gunicorn virtualenv
+pip install gunicorn virtualenv ansible awscli
 
 #get ctfd
 wget -q https://github.com/CTFd/CTFd/archive/2.5.0.zip
