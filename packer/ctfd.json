@@ -23,8 +23,8 @@
   "provisioners": [
     {
         "type": "file",
-        "source": "ctfd.service",
-        "destination": "/tmp/ctfd.service"
+        "source": "ctfd.service.j2",
+        "destination": "/tmp/ctfd.service.j2"
     },
     {
       "type": "shell",

@@ -28,12 +28,3 @@ sudo su ctfd -c "pip install virtualenv --user"
 sudo su ctfd -c "/opt/CTFd-2.5.0/.local/bin/virtualenv /opt/CTFd-2.5.0"
 sudo su ctfd -c "/opt/CTFd-2.5.0/bin/pip install -r /opt/CTFd-2.5.0/requirements.txt"
 
-# copy systemd unit
-sudo cp /tmp/ctfd.service /etc/systemd/system/ctfd.service
-
-# reload systemd
-sudo systemctl daemon-reload
-
-# enable and start ctfd
-sudo systemctl enable ctfd.service
-sudo systemctl start ctfd.service

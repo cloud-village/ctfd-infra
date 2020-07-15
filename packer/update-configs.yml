@@ -9,13 +9,13 @@
         src: /tmp/ctfd.service.j2
         dest: /etc/systemd/system/ctfd.service
       vars:
-        DB_PASS: "{{ lookup('aws_ssm', '/ctfd/database/password', region='us-east-2', decrypt=True ) }}"
-        DB_URL: "{{ lookup('aws_ssm', '/ctfd/database/url', region='us-east-2' ) }}"
-        REDIS_URL: "{{ lookup('aws_ssm', '/ctfd/redis/url', region='us-east-2' ) }}"
-        AWS_S3_BUCKET: "{{ lookup('aws_ssm', '/ctfd/s3/bucket_name', region='us-east-2' ) }}"
+        DB_PASS: "{{ lookup('aws_secret', '/ctfd/database/password') }}"
+        DB_URL: "{{ lookup('aws_secret', '/ctfd/database/url') }}"
+        REDIS_URL: "{{ lookup('aws_secret', '/ctfd/redis/url') }}"
+        AWS_S3_BUCKET: "{{ lookup('aws_secret', '/ctfd/s3/bucket_name') }}"
     - name: render .ctfd_secret_key
       copy:
-        content: "{{ lookup('aws_ssm', '/ctfd/app_key', region='us-east-2', decrypt=True ) }}"
+        content: "{{ lookup('aws_secret', '/ctfd/app_key') }}"
 
     - name: restart ctfd.service
       systemd:
