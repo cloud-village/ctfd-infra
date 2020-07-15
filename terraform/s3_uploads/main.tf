@@ -14,9 +14,12 @@ resource "aws_s3_bucket_public_access_block" "example" {
   block_public_policy = true
 }
 
-resource "aws_ssm_parameter" "bucket_name" {
-  name  = "/ctfd/s3/bucket_name"
-  type  = "String"
-  value = aws_s3_bucket.uploads_bucket.id
+resource "aws_secretsmanager_secret" "example" {
+  name = "/ctfd/s3/bucket_name"
+}
+
+resource "aws_secretsmanager_secret_version" "example" {
+  secret_id     = aws_secretsmanager_secret.example.id
+  secret_string = aws_s3_bucket.uploads_bucket.id
 }
 

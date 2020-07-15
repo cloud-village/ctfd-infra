@@ -36,9 +36,13 @@ resource "aws_security_group" "allow_redis" {
   }
 }
 
-resource "aws_ssm_parameter" "redis" {
-  name  = "/ctfd/redis/url"
-  type  = "String"
-  value = aws_elasticache_cluster.cache.cache_nodes.0.address
+resource "aws_secretsmanager_secret" "example" {
+  name = "/ctfd/redis/url"
 }
+
+resource "aws_secretsmanager_secret_version" "example" {
+  secret_id     = aws_secretsmanager_secret.example.id
+  secret_string = aws_elasticache_cluster.cache.cache_nodes.0.address
+}
+
 

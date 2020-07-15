@@ -116,9 +116,12 @@ resource "random_string" "ctfd_key" {
   override_special = "/@£$"
 }
 
-resource "aws_ssm_parameter" "secret" {
-  name        = "/ctfd/app_key"
-  description = "secret key for ctfd"
-  type        = "SecureString"
-  value       = random_string.ctfd_key.result
+resource "aws_secretsmanager_secret" "example" {
+  name = "/ctfd/app_key"
 }
+
+resource "aws_secretsmanager_secret_version" "example" {
+  secret_id     = aws_secretsmanager_secret.example.id
+  secret_string = random_string.ctfd_key.result
+}
+

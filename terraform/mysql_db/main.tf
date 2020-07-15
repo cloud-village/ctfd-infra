@@ -54,16 +54,21 @@ resource "aws_security_group" "allow_mysql" {
   }
 }
 
-resource "aws_ssm_parameter" "secret" {
-  name        = "/ctfd/database/password"
-  description = "mysql password"
-  type        = "SecureString"
-  value       = random_password.random.result
+resource "aws_secretsmanager_secret" "url" {
+  name = "/ctfd/database/url"
 }
 
-resource "aws_ssm_parameter" "db_url" {
-  name        = "/ctfd/database/url"
-  description = "mysql url"
-  type        = "String"
-  value       = aws_rds_cluster.default.endpoint
+resource "aws_secretsmanager_secret_version" "url" {
+  secret_id     = aws_secretsmanager_secret.url.id
+  secret_string = aws_rds_cluster.default.endpoint
 }
+
+resource "aws_secretsmanager_secret" "pass" {
+  name = "/ctfd/database/pass"
+}
+
+resource "aws_secretsmanager_secret_version" "pass" {
+  secret_id     = aws_secretsmanager_secret.pass.id
+  secret_string = random_password.random.result
+}
+
