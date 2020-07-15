@@ -13,7 +13,7 @@ ExecReload=/bin/kill -s HUP $MAINPID
 KillMode=mixed
 PrivateTmp=true
 Restart=always
-Environment=DATABASE_URL="{{ DB_URL }}"
+Environment=DATABASE_URL="mysql+pymysql://ctfd:{{ DB_PASS}}@{{ DB_URL}}/ctfd"
 Environment=CACHE_TYPE="redis"
 Environment=REDIS_URL="{{ REDIS_URL }}"
 Environment=UPLOAD_PROVIDER="s3"
