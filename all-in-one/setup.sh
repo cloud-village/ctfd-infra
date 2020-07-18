@@ -10,7 +10,9 @@ sudo DEBIAN_FRONTEND=noninteractive apt-get install -y \
 	python-pip \
 	libffi-dev \
     python-pip-whl \
-	zip
+	zip \
+    mysql-server \
+    redis
 
 # install pip deps
 pip install gunicorn virtualenv
@@ -30,6 +32,17 @@ sudo su ctfd -c "/opt/CTFd-2.5.0/bin/pip install -r /opt/CTFd-2.5.0/requirements
 
 # copy systemd unit
 sudo cp /tmp/ctfd.service /etc/systemd/system/ctfd.service
+
+# provision dataase
+echo "Initialising database"
+commands="CREATE DATABASE ctfd;
+CREATE USER 'ctfduser'@'localhost' IDENTIFIED BY 'ctfd';
+GRANT USAGE ON *.* TO 'ctfduser'@'localhost' IDENTIFIED BY 'ctfd';
+GRANT ALL privileges ON ctfd.* TO 'ctfduser'@'localhost';FLUSH PRIVILEGES;"
+echo "${commands}" | sudo /usr/bin/mysql -u root -pctfd
+
+# restart cache
+sudo systemctl restart redis
 
 # reload systemd
 sudo systemctl daemon-reload
