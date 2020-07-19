@@ -41,12 +41,10 @@ GRANT USAGE ON *.* TO 'ctfduser'@'localhost' IDENTIFIED BY 'ctfd';
 GRANT ALL privileges ON ctfd.* TO 'ctfduser'@'localhost';FLUSH PRIVILEGES;"
 echo "${commands}" | sudo /usr/bin/mysql -u root -pctfd
 
-# restart cache
-sudo systemctl restart redis
-
 # reload systemd
 sudo systemctl daemon-reload
 
 # enable and start ctfd
+sudo systemctl enable redis
+sudo systemctl enable mysql
 sudo systemctl enable ctfd.service
-sudo systemctl start ctfd.service
