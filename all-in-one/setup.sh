@@ -41,6 +41,9 @@ GRANT USAGE ON *.* TO 'ctfduser'@'localhost' IDENTIFIED BY 'ctfd';
 GRANT ALL privileges ON ctfd.* TO 'ctfduser'@'localhost';FLUSH PRIVILEGES;"
 echo "${commands}" | sudo /usr/bin/mysql -u root -pctfd
 
+# provision the db
+sudo su ctfd -c "/opt/CTFd-2.5.0/.local/bin/python manage.py db upgrade"
+
 # reload systemd
 sudo systemctl daemon-reload
 
