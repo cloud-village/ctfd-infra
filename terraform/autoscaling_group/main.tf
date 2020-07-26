@@ -14,5 +14,7 @@ resource "aws_autoscaling_group" "ctfd_asg" {
   target_group_arns = [var.target_group_arns]
 
   termination_policies = ["OldestInstance", "OldestLaunchConfiguration"]
+
+  depends_on = [var.asg_depends_on]
 }
 

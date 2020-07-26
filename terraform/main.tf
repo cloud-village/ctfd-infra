@@ -16,6 +16,7 @@ module "ctfd_autoscaling_group" {
   max_size           = var.max_size
   launch_template_id = module.ctfd_launch_template.cftd_template.id
   target_group_arns  = module.ctfd_alb.ctfd_target_group.arn
+  asg_depends_on     = module.mysql_db
 }
 
 module "ctfd_alb" {

@@ -37,3 +37,9 @@ variable "scale_down_threshold" {
   description = "percentage of CPU to trigger scale down"
   default     = 50
 }
+
+variable "asg_depends_on" {
+  type        = any
+  default     = null
+  description = "resource that should be created before the ASG"
+}
