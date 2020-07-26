@@ -1,11 +1,14 @@
 resource "aws_lb" "ctfd_alb" {
-  name               = "ctfd-alb"
+  name               = uuid()
   internal           = false
   load_balancer_type = "application"
   security_groups    = [aws_security_group.allow_tls.id, var.instance_sg_id]
   subnets            = var.subnets
 
   enable_deletion_protection = false
+  tags = {
+    application = "ctfd"
+  }
 }
 
 resource "aws_lb_target_group" "ctfd_target_group" {
