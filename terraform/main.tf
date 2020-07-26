@@ -33,7 +33,7 @@ module "iam_profile" {
 
 module "s3_uploads" {
   source              = "./s3_uploads"
-  uploads_bucket_name = var.uploads_bucket_name
+  uploads_bucket_name = uuid()
 }
 
 module "dns" {
