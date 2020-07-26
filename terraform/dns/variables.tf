@@ -18,3 +18,10 @@ variable "alb_zone_id" {
   type        = string
   description = "AWS DNS zone id of the ALB"
 }
+
+variable "enabled" {
+  type        = bool
+  description = "do you want to create DNS entries in route53?"
+  default     = false
+}
+

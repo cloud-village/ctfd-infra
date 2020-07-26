@@ -1,4 +1,5 @@
 resource "aws_route53_record" "ctf_dns" {
+  count   = var.enabled ? 1 : 0
   zone_id = var.zone_id
   name    = var.dns_name
   type    = "A"

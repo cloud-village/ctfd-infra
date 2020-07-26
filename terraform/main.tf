@@ -37,6 +37,7 @@ module "s3_uploads" {
 }
 
 module "dns" {
+  enabled      = var.create_aws_dns
   source       = "./dns"
   zone_id      = var.route53_zone_id
   alb_dns_name = module.ctfd_alb.ctfd_alb.dns_name

@@ -65,3 +65,8 @@ variable "region" {
   description = "aws region the resources will be created in"
 }
 
+variable "create_aws_dns" {
+  type        = bool
+  description = "do you want to create DNS entries in route53?"
+  default     = false
+}
