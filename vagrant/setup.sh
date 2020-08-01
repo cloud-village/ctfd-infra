@@ -43,7 +43,7 @@ GRANT ALL privileges ON ctfd.* TO 'ctfduser'@'localhost';FLUSH PRIVILEGES;"
 echo "${commands}" | sudo /usr/bin/mysql -u root -pctfd
 
 # upgrade the db
-sudo su ctfd -c "/opt/CTFd-2.5.0/bin/python manage.py db upgrade"
+sudo su ctfd -c "cd /opt/CTFd-2.5.0/; /opt/CTFd-2.5.0/bin/python manage.py db upgrade"
 
 # reload systemd
 sudo systemctl daemon-reload
