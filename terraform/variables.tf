@@ -70,3 +70,9 @@ variable "create_aws_dns" {
   description = "do you want to create DNS entries in route53?"
   default     = false
 }
+
+variable "inbound_ips" {
+  description = "list of allowed inbound IP addresses"
+  type        = list(string)
+  default     = ["0.0.0.0/0"]
+}

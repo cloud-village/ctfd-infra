@@ -18,3 +18,8 @@ variable "instance_sg_id" {
   description = "security group id that allows traffic between ALB and nodes"
 }
 
+variable "inbound_ips" {
+  description = "list of allowed inbound IP addresses"
+  type        = list(string)
+  default     = ["0.0.0.0/0"]
+}

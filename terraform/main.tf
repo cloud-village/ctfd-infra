@@ -25,6 +25,7 @@ module "ctfd_alb" {
   vpc_id          = var.vpc_id
   certificate_arn = var.certificate_arn
   instance_sg_id  = module.ctfd_launch_template.instance_sg.id
+  inbound_ips     = var.inbound_ips
 }
 
 module "iam_profile" {
