@@ -19,6 +19,8 @@ Terraform v0.12.28
 
 
 ### packer to build the AMI
+update your `vars.json` file accordingly
+
 ```
 cd packer
 packer build -var-file=vars.json ctfd.json
@@ -30,6 +32,8 @@ packer build -var-file=vars.json ctfd.json
 
 
 ### teraform to build the infra
+update your variables.tf file accordingly
+
 ```
 cd terraform/
 terraform apply
