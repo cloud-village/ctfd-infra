@@ -1,4 +1,6 @@
-# CTFd infra
+![CTFd on AWS](image/04a30368-9e4c-4823-ab2c-787073103c3a_200x200.png)
+
+
 Build yourself some infra to run [`ctfd` v2.5.0](https://github.com/CTFd/CTFd/) in AWS.
 
 
