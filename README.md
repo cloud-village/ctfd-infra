@@ -32,7 +32,7 @@ packer build -var-file=vars.json ctfd.json
 
 
 ### teraform to build the infra
-update your variables.tf file accordingly
+update your `variables.tf` file accordingly
 
 ```
 cd terraform/
