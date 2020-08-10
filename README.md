@@ -3,8 +3,8 @@
 
 Build yourself some infra to run [`ctfd` v2.5.0](https://github.com/CTFd/CTFd/) in AWS.
 
-
-### workstation requirements
+## Requirements
+### workstation
 ```
 ➜  packer -version
 1.6.0
@@ -12,13 +12,16 @@ Build yourself some infra to run [`ctfd` v2.5.0](https://github.com/CTFd/CTFd/) 
 Terraform v0.12.28
 ```
 
-
-### AWS requirements
+### AWS
 - Domain imported into Route53 and SSL from ACM
 - VPC and subnets for EC2 instances
 
+### Other Stuff
+- smtp server and credentials, such as [AWS SES](https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-email-smtp.html) or [Mailgun](https://documentation.mailgun.com/en/latest/quickstart-sending.html#send-via-api)
 
-### packer to build the AMI
+
+## Build the Things
+### Build the AMI
 update your `vars.json` file accordingly
 
 ```
@@ -31,7 +34,7 @@ packer build -var-file=vars.json ctfd.json
 ```
 
 
-### teraform to build the infra
+### Build the Infra
 update your `variables.tf` file accordingly
 
 ```
