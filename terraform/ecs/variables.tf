@@ -1,0 +1,17 @@
+variable "name" {}
+varible "ctfd_tag" {}
+varible "aws_access_key" {}
+varible "aws_secret_access_key" {}
+varible "mail_username" {}
+varible "mail_password" {}
+varible "database_url" {}
+varible "workers" {}
+varible "secret_key" {}
+varible "s3_bucekt" {}
+varible "mailfrom_addr" {}
+varible "mail_server" {}
+varible "mail_port" {}
+varible "redis_url" {}
+varible "task_family_name" {}
+varible "region" {}
+varible "ctfd_version" {}
