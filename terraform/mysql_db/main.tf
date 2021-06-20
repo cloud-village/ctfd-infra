@@ -1,32 +1,25 @@
 resource "random_password" "random" {
   length = 22
+  # URI constraints FTL :sob:
+  special = false
   lifecycle {
     ignore_changes = all
   }
 }
 
-resource "aws_rds_cluster" "default" {
-  cluster_identifier      = "ctfd-db"
-  engine                  = "aurora-mysql"
-  engine_version          = "5.7.mysql_aurora.2.03.2"
-  availability_zones      = var.availability_zones
-  database_name           = "ctfd"
-  master_username         = "ctfd"
-  master_password         = random_password.random.result
+resource "aws_db_instance" "default" {
+  allocated_storage       = 10
+  engine                  = "mysql"
+  engine_version          = "5.7"
+  instance_class          = "db.t3.micro"
+  name                    = "ctfd"
+  username                = "ctfd"
+  password                = random_password.random.result
+  parameter_group_name    = "default.mysql5.7"
   backup_retention_period = 5
   copy_tags_to_snapshot   = true
-  preferred_backup_window = "07:00-09:00"
   skip_final_snapshot     = true
   vpc_security_group_ids  = [aws_security_group.allow_mysql.id]
-}
-
-resource "aws_rds_cluster_instance" "cluster_instances" {
-  count              = length(var.availability_zones)
-  identifier         = "ctfd-db-${count.index}"
-  cluster_identifier = aws_rds_cluster.default.id
-  instance_class     = "db.t3.medium"
-  engine             = aws_rds_cluster.default.engine
-  engine_version     = aws_rds_cluster.default.engine_version
 }
 
 resource "aws_security_group" "allow_mysql" {
@@ -54,21 +47,12 @@ resource "aws_security_group" "allow_mysql" {
   }
 }
 
-resource "aws_secretsmanager_secret" "url" {
-  name = "/ctfd/database/url"
+resource "aws_secretsmanager_secret" "db_uri" {
+  name = "/ctfd/database/uri"
 }
 
-resource "aws_secretsmanager_secret_version" "url" {
-  secret_id     = aws_secretsmanager_secret.url.id
-  secret_string = aws_rds_cluster.default.endpoint
-}
-
-resource "aws_secretsmanager_secret" "pass" {
-  name = "/ctfd/database/pass"
-}
-
-resource "aws_secretsmanager_secret_version" "pass" {
-  secret_id     = aws_secretsmanager_secret.pass.id
-  secret_string = random_password.random.result
+resource "aws_secretsmanager_secret_version" "db_uri" {
+  secret_id     = aws_secretsmanager_secret.db_uri.id
+  secret_string = "mysql+pymsql://ctfd:${random_password.random.result}@aws_db_instance.defaut.endpoint}"
 }
 
