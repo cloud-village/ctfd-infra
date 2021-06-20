@@ -1,9 +1,12 @@
-output "role" {
+output "ecs_role" {
   value = aws_iam_role.role
 }
-output "policy" {
-  value = aws_iam_policy.policy
+
+output "ctfd_s3_policy" {
+  value = aws_iam_policy.s3_policy
 }
-output "profile" {
-  value = aws_iam_instance_profile.profile
+
+output "ctfd_secrets_policy" {
+  value = aws_iam_policy.ctfd_secrets
 }
+
