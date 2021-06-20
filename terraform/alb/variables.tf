@@ -11,15 +11,29 @@ variable "vpc_id" {
 variable "certificate_arn" {
   type        = string
   description = "ARN for the SSL certificate used by the ALB"
-}
-
-variable "instance_sg_id" {
-  type        = string
-  description = "security group id that allows traffic between ALB and nodes"
+  default     = ""
 }
 
 variable "inbound_ips" {
   description = "list of allowed inbound IP addresses"
   type        = list(string)
   default     = ["0.0.0.0/0"]
+}
+
+variable "https_redirect_enabled" {
+  type        = bool
+  description = "is the https redirect enabled?"
+  default     = false
+}
+
+variable "ssl_termination_enabled" {
+  type        = bool
+  description = "is SSL termination enabled?"
+  default     = false
+}
+
+variable "allow_cloudflare" {
+  type        = bool
+  description = "is cloudflare being used?"
+  default     = false
 }
