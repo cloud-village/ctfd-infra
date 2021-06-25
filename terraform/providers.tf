@@ -8,5 +8,5 @@ provider "random" {
 }
 
 provider "cloudflare" {
-    version = "~>2.21.0"
+  version = "~>2.21.0"
 }

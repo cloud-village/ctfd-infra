@@ -30,5 +30,5 @@ module "redis" {
 }
 
 module "ecs" {
-    source = "./ecs"
+  source = "./ecs"
 }

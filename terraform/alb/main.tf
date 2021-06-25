@@ -1,6 +1,6 @@
 locals {
   # only create resources if enabled
-  https_redirect_enabled   = var.https_redirect_enabled ? 1 : 0
+  https_redirect_enabled  = var.https_redirect_enabled ? 1 : 0
   ssl_termination_enabled = var.ssl_termination_enabled ? 1 : 0
 
   # if allow_cloudflare is true, use IPs from the data source

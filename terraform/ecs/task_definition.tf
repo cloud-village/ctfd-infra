@@ -26,7 +26,7 @@ resource "aws_ecs_task_definition" "task" {
       "environment" : [
         { "name" : "WORKERS", "value" : "${var.workers}" },
         { "name" : "SECRET_KEY", "value" : "${var.secret_key}" },
-        { "name" : "AWS_S3_BUCKET", "value" : "${var.s3_bucekt}" },
+        { "name" : "AWS_S3_BUCKET", "value" : "${var.s3_bucket}" },
         { "name" : "MAILFROM_ADDR", "value" : "${var.mailfrom_addr}" },
         { "name" : "MAIL_SERVER", "value" : "${var.mail_server}" },
         { "name" : "MAIL_PORT", "value" : "${var.mail_port}" },

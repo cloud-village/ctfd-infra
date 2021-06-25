@@ -38,7 +38,7 @@ variable "secret_key" {
   description = "The secret value used to creation sessions and sign strings"
 }
 
-variable "s3_bucekt" {
+variable "s3_bucket" {
   type        = string
   description = "s3 bucket to store custom assets"
 }
@@ -79,8 +79,8 @@ variable "iam_role_arn" {
 }
 
 variable "iam_role_policy" {
-    type = string
-    description = "IAM role policy used by ECS service"
+  type        = string
+  description = "IAM role policy used by ECS service"
 }
 
 variable "target_group_arn" {
