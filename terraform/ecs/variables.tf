@@ -88,3 +88,12 @@ variable "target_group_arn" {
   description = "ARN of the load balancer target group"
 }
 
+variable "security_groups" {
+  type        = list(string)
+  description = "security groups used by the ECS service"
+}
+
+variable "subnets" {
+  type        = list(string)
+  description = "subnets used by the ECS service"
+}

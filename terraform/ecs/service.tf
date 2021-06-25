@@ -8,6 +8,11 @@ resource "aws_ecs_service" "ctfd" {
   iam_role   = var.iam_role_arn
   depends_on = [var.iam_role_policy]
 
+  network_configuration {
+    subnets         = var.subnets
+    security_groups = var.security_groups
+  }
+
   load_balancer {
     target_group_arn = var.target_group_arn
     container_name   = "ctfd"
