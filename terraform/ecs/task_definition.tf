@@ -1,5 +1,5 @@
 locals {
-  task_family_name = var.name
+  task_family_name = var.task_family_name
 }
 
 resource "aws_ecs_task_definition" "task" {
@@ -8,19 +8,18 @@ resource "aws_ecs_task_definition" "task" {
   cpu          = "256"
   memory       = "512"
 
-
   container_definitions = jsonencode([
     {
       name      = "ctfd"
-      image     = "ctfd/ctfd:${var.ctfd_tag}"
+      image     = "ctfd/ctfd:${var.ctfd_version}"
       essential = true
 
       "secrets" : [
-        { "name" : "AWS_ACCESS_KEY_ID", "value" : "${var.aws_access_key}" },
-        { "name" : "AWS_SECRET_ACCESS_KEY", "value" : "${var.aws_secret_access_key}" },
-        { "name" : "MAIL_USERNAME", "value" : "${var.mail_username}" },
-        { "name" : "MAIL_PASSWORD", "value" : "${var.mail_password}" },
-        { "name" : "DATABASE_URL", "value" : "{var.database_url}" },
+        { "name" : "AWS_ACCESS_KEY_ID", "value" : "${var.aws_access_key_arn}" },
+        { "name" : "AWS_SECRET_ACCESS_KEY", "value" : "${var.aws_secret_access_key_arn}" },
+        { "name" : "MAIL_USERNAME", "value" : "${var.mail_username_arn}" },
+        { "name" : "MAIL_PASSWORD", "value" : "${var.mail_password_arn}" },
+        { "name" : "DATABASE_URL", "value" : "{var.database_url_arn}" },
 
       ],
 
@@ -40,7 +39,7 @@ resource "aws_ecs_task_definition" "task" {
         logDriver = "awslogs"
         options = {
           awslogs-group         = "/ecs/${local.task_family_name}"
-          awslogs-region        = var.region
+          awslogs-region        = var.logs_region
           awslogs-stream-prefix = "ecs"
         }
       }
@@ -54,7 +53,7 @@ resource "aws_ecs_task_definition" "task" {
 
   requires_compatibilities = ["FARGATE"]
 
-  tags {
+  tags = {
     name         = local.task_family_name
     ctfd_version = var.ctfd_version
   }

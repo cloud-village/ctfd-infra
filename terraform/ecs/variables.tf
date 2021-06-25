@@ -1,17 +1,90 @@
-variable "name" {}
-varible "ctfd_tag" {}
-varible "aws_access_key" {}
-varible "aws_secret_access_key" {}
-varible "mail_username" {}
-varible "mail_password" {}
-varible "database_url" {}
-varible "workers" {}
-varible "secret_key" {}
-varible "s3_bucekt" {}
-varible "mailfrom_addr" {}
-varible "mail_server" {}
-varible "mail_port" {}
-varible "redis_url" {}
-varible "task_family_name" {}
-varible "region" {}
-varible "ctfd_version" {}
+variable "ctfd_version" {
+  type        = string
+  description = "docker tag for version of CTFd to run"
+}
+
+variable "aws_access_key_arn" {
+  type        = string
+  description = "ARN for aws access key for s3 access"
+}
+
+variable "aws_secret_access_key_arn" {
+  type        = string
+  description = "ARN for aws secret access key for s3 access"
+}
+
+variable "mail_username_arn" {
+  type        = string
+  description = "ARN for mail username"
+}
+
+variable "mail_password_arn" {
+  type        = string
+  description = "ARN for mail password"
+}
+
+variable "database_url_arn" {
+  type        = string
+  description = "ARN for DB uri"
+}
+
+variable "workers" {
+  type        = string
+  description = "number of gunicorn workers"
+}
+
+variable "secret_key" {
+  type        = string
+  description = "The secret value used to creation sessions and sign strings"
+}
+
+variable "s3_bucekt" {
+  type        = string
+  description = "s3 bucket to store custom assets"
+}
+
+variable "mailfrom_addr" {
+  type        = string
+  description = "The email address that emails are sent from if not overridden in the configuration panel."
+}
+
+variable "mail_server" {
+  type        = string
+  description = "The mail server that emails are sent from if not overriden in the configuration panel."
+}
+
+variable "mail_port" {
+  type        = string
+  description = "The mail port that emails are sent from if not overriden in the configuration panel."
+}
+
+variable "redis_url" {
+  type        = string
+  description = "redis URI"
+}
+
+variable "task_family_name" {
+  type        = string
+  description = "name of the ECS task"
+}
+
+variable "logs_region" {
+  type        = string
+  description = "region to store logs"
+}
+
+variable "iam_role_arn" {
+  type        = string
+  description = "ARN for role used by ECS service"
+}
+
+variable "iam_role_policy" {
+    type = string
+    description = "IAM role policy used by ECS service"
+}
+
+variable "target_group_arn" {
+  type        = string
+  description = "ARN of the load balancer target group"
+}
+
