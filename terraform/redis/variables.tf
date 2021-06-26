@@ -1,6 +1,6 @@
 variable "node_type" {
   type        = string
-  default     = "cache.t3.medium"
+  default     = "cache.t3.micro"
   description = "cache instance type"
 }
 
