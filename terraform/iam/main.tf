@@ -64,21 +64,19 @@ resource "aws_secretsmanager_secret_version" "s3_secret" {
 resource "aws_iam_role" "role" {
   name = "ctfd-uploads-role"
 
-  assume_role_policy = <<EOF
-{
-      "Version": "2012-10-17",
-      "Statement": [
-        {
-          "Action": "sts:AssumeRole",
-          "Principal": {
-            "Service": "ecs-tasks.amazonaws.com"
-          },
-          "Effect": "Allow",
-          "Sid": ""
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Action = "sts:AssumeRole"
+        Principal = {
+          Service = "ecs-tasks.amazonaws.com"
         }
-      ]
-    }
-EOF
+        Effect = "Allow"
+        Sid    = "ECSTasksAssumeRole"
+      }
+    ]
+  })
 }
 
 # IAM policy for ECS to access secrets
@@ -86,21 +84,19 @@ resource "aws_iam_policy" "ctfd_secrets" {
   name        = "ctfd_asm_access"
   description = "ctfd role access to secrets in ASM"
 
-  policy = <<EOF
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {   
-      "Action": [
-        "secretsmanager:GetSecretValue"
-        "secretsmanager:DescribeSecret"
-      ],  
-      "Effect": "Allow",
-      "Resource": "arn:aws:secretsmanager:*:${data.aws_caller_identity.current.account_id}:secret:/ctfd/*"
-    }
-  ]
-}
-EOF
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Action = [
+          "secretsmanager:GetSecretValue",
+          "secretsmanager:DescribeSecret"
+        ]
+        Effect   = "Allow"
+        Resource = "arn:aws:secretsmanager:*:${data.aws_caller_identity.current.account_id}:secret:/ctfd/*"
+      }
+    ]
+  })
 }
 
 resource "aws_iam_role_policy_attachment" "attach" {
