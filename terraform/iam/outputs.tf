@@ -10,3 +10,9 @@ output "ctfd_secrets_policy" {
   value = aws_iam_policy.ctfd_secrets
 }
 
+output "s3_access" {
+  value = aws_secretsmanager_secret.s3_access
+}
+output "s3_secret" {
+  value = aws_secretsmanager_secret.s3_secret
+}
