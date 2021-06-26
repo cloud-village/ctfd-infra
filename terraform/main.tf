@@ -39,7 +39,7 @@ module "ecs" {
   mailfrom_addr             = var.mailfrom_addr
   mail_server               = var.mail_server
   mail_port                 = var.mail_port
-  redis_url                 = module.redis.redis.cache_nodes.address
+  redis_url                 = module.redis.redis.cache_nodes[0].address
   task_family_name          = "ctfd"
   logs_region               = var.region
   iam_role_arn              = module.iam.ecs_role

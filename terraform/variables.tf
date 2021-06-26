@@ -20,11 +20,6 @@ variable "route53_zone_id" {
   default     = ""
 }
 
-variable "redis_node_type" {
-  type        = string
-  description = "type of nodes to use for redis"
-}
-
 variable "region" {
   type        = string
   description = "aws region the resources will be created in"
