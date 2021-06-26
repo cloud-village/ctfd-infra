@@ -1,5 +1,5 @@
-output "db_instance" {
-  value = aws_db_instance.default
+output "db_uri" {
+  value = aws_secretsmanager_secret.db_uri
 }
 
 output "db_security_group" {
