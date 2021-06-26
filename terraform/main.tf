@@ -14,7 +14,7 @@ module "iam_profile" {
 
 module "s3_uploads" {
   source              = "./s3_uploads"
-  uploads_bucket_name = uuid()
+  uploads_bucket_name = "ctfd-uploads-${random_string.bucket_seed.result}"
 }
 
 module "mysql_db" {
