@@ -5,15 +5,18 @@ locals {
 
   # if allow_cloudflare is true, use IPs from the data source
   # otherwise, use the list provided in inbound_ips
-  inbound_ips = var.allow_cloudflare ? data.cloudflare_ip_ranges.cloudflare[0].ipv4_cidr_blocks : var.inbound_ips
+  # this is VERY UGLY way to strip hereodc and empty lines, but it works :sob:
+  inbound_ips = var.allow_cloudflare ? split("\n", chomp(data.http.cloudflare_ips[0].body)) : var.inbound_ips
 
 }
 
 ### get cloudflare IPs 
-data "cloudflare_ip_ranges" "cloudflare" {
+data "http" "cloudflare_ips" {
   # only run if allow_cloudflare is true
   count = var.allow_cloudflare ? 1 : 0
+  url   = "https://www.cloudflare.com/ips-v4"
 }
+
 
 resource "aws_lb" "ctfd_alb" {
   internal           = false
@@ -75,7 +78,7 @@ resource "aws_security_group" "public_facing" {
 
   dynamic "ingress" {
     # dynamic blocks require an interable, so let's pretend
-    for_each = local.https_redirect_enabled ? [1] : []
+    for_each = local.https_redirect_enabled == 1 ? [1] : []
     content {
       description = "HTTPS from public internet"
       from_port   = 443
@@ -86,13 +89,13 @@ resource "aws_security_group" "public_facing" {
   }
 
   dynamic "ingress" {
-    for_each = local.inbound_ips
+    for_each = local.https_redirect_enabled == 0 ? [1] : []
     content {
       description = "HTTP from public internet"
       from_port   = 80
       to_port     = 80
       protocol    = "tcp"
-      cidr_blocks = each.value
+      cidr_blocks = local.inbound_ips
     }
   }
 
