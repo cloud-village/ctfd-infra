@@ -1,12 +1,19 @@
+terraform {
+  required_providers {
+    aws = {
+      source = "hashicorp/aws"
+      version = "3.47.0"
+    }
+    random = {
+      source = "hashicorp/random"
+      version = "3.1.0"
+    }
+  }
+}
+
+
 provider "aws" {
-  region  = var.region
-  version = "~> 3.46.0"
+  region = "us-east-2"
 }
 
-provider "random" {
-  version = "3.1.0"
-}
-
-provider "cloudflare" {
-  version = "~>2.21.0"
-}
+provider "random" {}
