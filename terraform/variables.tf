@@ -3,12 +3,6 @@ variable "vpc_id" {
   description = "vpc_id that all the things will live in"
 }
 
-
-variable "availability_zones" {
-  type        = list(string)
-  description = "availability zones where things will live"
-}
-
 variable "alb_subnets" {
   type        = list(string)
   description = "subnet ids the ALB should live in"
