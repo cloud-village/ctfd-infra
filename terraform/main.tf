@@ -47,7 +47,7 @@ module "ecs" {
   logs_region               = var.region
   iam_role_arn              = module.iam.ecs_role
   iam_role_policy           = module.iam.ctfd_secrets_policy.id
-  target_group_arn          = module.alb #TODO
+  target_group_arn          = module.ctfd_alb.ctfd_target_group.arn
   security_groups = [
     module.redis.redis_security_group.id,
     module.mysql_db.db_security_group.id
