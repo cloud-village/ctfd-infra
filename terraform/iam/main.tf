@@ -25,7 +25,7 @@ resource "aws_iam_policy" "s3_policy" {
         ]
         Effect = "Allow"
         Resource = [
-          ":arn:aws:s3:::${var.uploads_bucket_name}",
+          "arn:aws:s3:::${var.uploads_bucket_name}",
           "arn:aws:s3:::${var.uploads_bucket_name}/*"
         ]
       },
