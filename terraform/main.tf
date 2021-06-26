@@ -42,7 +42,7 @@ module "ecs" {
   redis_url                 = module.redis.redis.cache_nodes[0].address
   task_family_name          = "ctfd"
   logs_region               = var.region
-  iam_role_arn              = module.iam.ecs_role
+  iam_role_arn              = module.iam.ecs_role.arn
   iam_role_policy           = module.iam.ctfd_secrets_policy.id
   target_group_arn          = module.ctfd_alb.ctfd_target_group.arn
   security_groups = [
