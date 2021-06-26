@@ -34,6 +34,7 @@ resource "aws_lb_target_group" "ctfd_target_group" {
   name     = "ctfd-tg"
   port     = 8000
   protocol = "HTTP"
+  target_type = "ip"
   vpc_id   = var.vpc_id
   health_check {
     matcher = "200-399"
