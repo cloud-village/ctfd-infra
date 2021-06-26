@@ -1,8 +1,10 @@
 module "ctfd_alb" { # TODO: update
-  source      = "./alb"
-  subnets     = var.alb_subnets
-  vpc_id      = var.vpc_id
-  inbound_ips = var.inbound_ips
+  source                 = "./alb"
+  subnets                = var.alb_subnets
+  vpc_id                 = var.vpc_id
+  https_redirect_enabled = false
+  ssl_termination_enabled = false
+  allow_cloudflare       = true
 }
 
 module "iam" {
