@@ -76,3 +76,43 @@ variable "inbound_ips" {
   type        = list(string)
   default     = ["0.0.0.0/0"]
 }
+
+variable "ctfd_version" {
+  type        = string
+  description = "docker tag for CTFd version"
+  default     = "mark-3.3.0"
+}
+
+variable "workers" {
+  type        = string
+  description = "number of gunicorn workers"
+
+}
+
+variable "mailfrom_addr" {
+  type        = string
+  description = "The email address that emails are sent from if not overridden in the configuration panel."
+}
+
+
+variable "mail_server" {
+  type        = string
+  description = "The mail server that emails are sent from if not overriden in the configuration panel."
+}
+
+variable "mail_port" {
+  type        = string
+  description = "The mail port that emails are sent from if not overriden in the configuration panel."
+}
+
+variable "ecs_subnets" {
+  type        = list(string)
+  description = "subnets used by the ECS service"
+}
+
+variable "logs_region" {
+  type        = string
+  description = "region to store logs"
+}
+
+

@@ -52,5 +52,5 @@ module "ecs" {
     module.redis.redis_security_group.id,
     module.mysql_db.db_security_group.id
   ]
-  subnets = var.subnets
+  subnets = var.ecs_subnets
 }
