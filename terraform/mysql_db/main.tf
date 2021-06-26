@@ -53,6 +53,6 @@ resource "aws_secretsmanager_secret" "db_uri" {
 
 resource "aws_secretsmanager_secret_version" "db_uri" {
   secret_id     = aws_secretsmanager_secret.db_uri.id
-  secret_string = "mysql+pymsql://ctfd:${random_password.random.result}@aws_db_instance.defaut.endpoint}"
+  secret_string = "mysql+pymsql://ctfd:${random_password.random.result}@${aws_db_instance.default.endpoint}"
 }
 
