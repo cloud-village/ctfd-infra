@@ -5,9 +5,6 @@ resource "aws_ecs_service" "ctfd" {
   desired_count   = 3
   launch_type     = "FARGATE"
 
-  iam_role   = var.iam_role_arn
-  depends_on = [var.iam_role_policy]
-
   network_configuration {
     subnets         = var.subnets
     security_groups = var.security_groups

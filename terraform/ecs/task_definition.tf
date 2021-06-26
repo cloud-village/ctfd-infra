@@ -7,6 +7,7 @@ resource "aws_ecs_task_definition" "task" {
   network_mode = "awsvpc"
   cpu          = "256"
   memory       = "512"
+  execution_role_arn = var.execution_role_arn
 
   container_definitions = jsonencode([
     {
@@ -15,11 +16,11 @@ resource "aws_ecs_task_definition" "task" {
       essential = true
 
       "secrets" : [
-        { "name" : "AWS_ACCESS_KEY_ID", "value" : "${var.aws_access_key_arn}" },
-        { "name" : "AWS_SECRET_ACCESS_KEY", "value" : "${var.aws_secret_access_key_arn}" },
-        { "name" : "MAIL_USERNAME", "value" : "${var.mail_username_arn}" },
-        { "name" : "MAIL_PASSWORD", "value" : "${var.mail_password_arn}" },
-        { "name" : "DATABASE_URL", "value" : "{var.database_url_arn}" },
+        { "name" : "AWS_ACCESS_KEY_ID", "valueFrom" : var.aws_access_key_arn },
+        { "name" : "AWS_SECRET_ACCESS_KEY", "valueFrom" : var.aws_secret_access_key_arn },
+        { "name" : "MAIL_USERNAME", "valueFrom" : var.mail_username_arn },
+        { "name" : "MAIL_PASSWORD", "valueFrom" : var.mail_password_arn },
+        { "name" : "DATABASE_URL", "valueFrom" : var.database_url_arn },
 
       ],
 

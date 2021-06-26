@@ -33,7 +33,7 @@ module "ecs" {
   aws_access_key_arn        = module.iam.s3_access.arn
   aws_secret_access_key_arn = module.iam.s3_secret.arn
   mail_username_arn         = "placeholder"        # TODO: ASM? vars? IDK
-  mail_password_arn         = "also a placeholder" # TODO: ASM? vars? IDK
+  mail_password_arn         = "also-placeholder" # TODO: ASM? vars? IDK
   database_url_arn          = module.mysql_db.db_uri.arn
   workers                   = var.workers
   secret_key                = random_string.secret_key.result
@@ -44,7 +44,7 @@ module "ecs" {
   redis_url                 = module.redis.redis.cache_nodes[0].address
   task_family_name          = "ctfd"
   logs_region               = var.region
-  iam_role_arn              = module.iam.ecs_role.arn
+  execution_role_arn        = module.iam.ecs_role.arn
   iam_role_policy           = module.iam.ctfd_secrets_policy.id
   target_group_arn          = module.ctfd_alb.ctfd_target_group.arn
   security_groups = [

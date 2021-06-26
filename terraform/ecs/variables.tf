@@ -73,11 +73,6 @@ variable "logs_region" {
   description = "region to store logs"
 }
 
-variable "iam_role_arn" {
-  type        = string
-  description = "ARN for role used by ECS service"
-}
-
 variable "iam_role_policy" {
   type        = string
   description = "IAM role policy used by ECS service"
@@ -97,3 +92,9 @@ variable "subnets" {
   type        = list(string)
   description = "subnets used by the ECS service"
 }
+
+variable "execution_role_arn" {
+  type        = string
+  description = "ARN for execution role used by ECS task"
+}
+
