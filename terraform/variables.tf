@@ -11,13 +11,13 @@ variable "alb_subnets" {
 variable "certificate_arn" {
   type        = string
   description = "ARN for the SSL certificate used by the ALB"
-  default = ""
+  default     = ""
 }
 
 variable "route53_zone_id" {
   type        = string
   description = "hosted zone id"
-  default = ""
+  default     = ""
 }
 
 variable "redis_node_type" {
@@ -51,7 +51,7 @@ variable "ctfd_version" {
 variable "workers" {
   type        = string
   description = "number of gunicorn workers"
-  default = 3
+  default     = 3
 }
 
 variable "mailfrom_addr" {

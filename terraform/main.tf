@@ -1,9 +1,8 @@
 module "ctfd_alb" { # TODO: update
-  source          = "./alb"
-  subnets         = var.alb_subnets
-  vpc_id          = var.vpc_id
-  certificate_arn = var.certificate_arn
-  inbound_ips     = var.inbound_ips
+  source      = "./alb"
+  subnets     = var.alb_subnets
+  vpc_id      = var.vpc_id
+  inbound_ips = var.inbound_ips
 }
 
 module "iam" {
@@ -17,15 +16,13 @@ module "s3_uploads" {
 }
 
 module "mysql_db" {
-  source             = "./mysql_db"
-  availability_zones = var.availability_zones
-  vpc_id             = var.vpc_id
+  source = "./mysql_db"
+  vpc_id = var.vpc_id
 }
 
 module "redis" {
-  source    = "./redis"
-  node_type = var.redis_node_type
-  vpc_id    = var.vpc_id
+  source = "./redis"
+  vpc_id = var.vpc_id
 }
 
 module "ecs" {
