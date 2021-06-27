@@ -31,11 +31,11 @@ resource "aws_lb" "ctfd_alb" {
 }
 
 resource "aws_lb_target_group" "ctfd_target_group" {
-  name     = "ctfd-tg"
-  port     = 8000
-  protocol = "HTTP"
+  name        = "ctfd-tg"
+  port        = 8000
+  protocol    = "HTTP"
   target_type = "ip"
-  vpc_id   = var.vpc_id
+  vpc_id      = var.vpc_id
   health_check {
     matcher = "200-399"
   }
@@ -69,6 +69,19 @@ resource "aws_lb_listener" "redirect_http_to_https" {
       protocol    = "HTTPS"
       status_code = "HTTP_301"
     }
+  }
+}
+
+
+resource "aws_lb_listener" "http_only" {
+  count             = local.https_redirect_enabled == 0 && local.ssl_termination_enabled == 0 ? 1 : 0
+  load_balancer_arn = aws_lb.ctfd_alb.arn
+  port              = "80"
+  protocol          = "HTTP"
+
+  default_action {
+    type = "forward"
+    target_group_arn = aws_lb_target_group.ctfd_target_group.arn
   }
 }
 
