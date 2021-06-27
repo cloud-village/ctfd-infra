@@ -1,10 +1,11 @@
 module "ctfd_alb" { # TODO: update
-  source                 = "./alb"
-  subnets                = var.alb_subnets
-  vpc_id                 = var.vpc_id
-  https_redirect_enabled = false
-  ssl_termination_enabled = false
-  allow_cloudflare       = true
+  source                  = "./alb"
+  subnets                 = var.alb_subnets
+  vpc_id                  = var.vpc_id
+  https_redirect_enabled  = var.https_redirect_enabled
+  ssl_termination_enabled = var.ssl_termination_enabled
+  allow_cloudflare        = var.allow_cloudflare
+  inbound_ips             = var.inbound_ips
 }
 
 module "iam" {
@@ -32,8 +33,8 @@ module "ecs" {
   ctfd_version              = var.ctfd_version
   aws_access_key_arn        = module.iam.s3_access.arn
   aws_secret_access_key_arn = module.iam.s3_secret.arn
-  mail_username_arn         = "placeholder"        # TODO: ASM? vars? IDK
-  mail_password_arn         = "also-placeholder" # TODO: ASM? vars? IDK
+  mail_username_arn         = module.iam.s3_access.arn # TODO: ASM? vars? IDK
+  mail_password_arn         = module.iam.s3_access.arn # TODO: ASM? vars? IDK
   database_url_arn          = module.mysql_db.db_uri.arn
   workers                   = var.workers
   secret_key                = random_string.secret_key.result
