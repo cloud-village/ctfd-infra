@@ -11,6 +11,7 @@ module "ctfd_alb" { # TODO: update
 module "iam" {
   source              = "./iam"
   uploads_bucket_name = module.s3_uploads.uploads_bucket.id
+  region              = var.region
 }
 
 module "s3_uploads" {
@@ -47,7 +48,7 @@ module "ecs" {
   task_family_name          = "ctfd"
   logs_region               = var.region
   execution_role_arn        = module.iam.ecs_role.arn
-  iam_role_policy           = module.iam.ctfd_secrets_policy.id
+  iam_role_policy           = module.iam.ctfd_ecs_policy.id
   target_group_arn          = module.ctfd_alb.ctfd_target_group.arn
   security_groups = [
     module.redis.redis_security_group.id,

@@ -6,8 +6,8 @@ output "ctfd_s3_policy" {
   value = aws_iam_policy.s3_policy
 }
 
-output "ctfd_secrets_policy" {
-  value = aws_iam_policy.ctfd_secrets
+output "ctfd_ecs_policy" {
+  value = aws_iam_policy.ctfd_ecs_policy
 }
 
 output "s3_access" {

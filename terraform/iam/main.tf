@@ -79,24 +79,33 @@ resource "aws_iam_role" "role" {
   })
 }
 
-# IAM policy for ECS to access secrets
-resource "aws_iam_policy" "ctfd_secrets" {
-  name        = "ctfd_secrets_access"
-  description = "ctfd role access to secrets in ASM and SSM Parameter Store"
+# IAM policy for ECS task
+resource "aws_iam_policy" "ctfd_ecs_policy" {
+  name        = "ctfd_ecs_policy"
+  description = "provide CTFd in ECS access to ASM, SSM Parameter Store, and logs"
 
   policy = jsonencode({
     Version = "2012-10-17"
     Statement = [
       {
+        Action = "ssm:GetParameters"
+        Effect = "Allow"
+        Resource = "arn:aws:ssm:${var.region}:${data.aws_caller_identity.current.account_id}:parameter/ctfd/*"
+      },
+      {
+        Action =  "secretsmanager:GetSecretValue"
+        Effect = "Allow"
+        Resource = "arn:aws:secretsmanager:${var.region}:${data.aws_caller_identity.current.account_id}:secret:/ctfd/*"
+      },
+      {
         Action = [
-          "secretsmanager:GetSecretValue",
-          "ssm:GetParameters"
-        ]
-        Effect   = "Allow"
-        Resource = [
-            "arn:aws:secretsmanager:*:${data.aws_caller_identity.current.account_id}:secret:/ctfd/*",
-            "arn:aws:ssm:*:${data.aws_caller_identity.current.account_id}:parameter/ctfd/*"
-        ]
+                "logs:CreateLogGroup",
+                "logs:CreateLogStream",
+                "logs:PutLogEvents",
+                "logs:DescribeLogStreams"
+            ] 
+        Effect = "Allow"
+        Resource = "arn:aws:logs:*:*:*"
       }
     ]
   })
@@ -104,6 +113,6 @@ resource "aws_iam_policy" "ctfd_secrets" {
 
 resource "aws_iam_role_policy_attachment" "attach" {
   role       = aws_iam_role.role.name
-  policy_arn = aws_iam_policy.ctfd_secrets.arn
+  policy_arn = aws_iam_policy.ctfd_ecs_policy.arn
 }
 
