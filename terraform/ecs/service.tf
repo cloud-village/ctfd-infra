@@ -2,7 +2,7 @@ resource "aws_ecs_service" "ctfd" {
   name            = "ctfd-service"
   cluster         = aws_ecs_cluster.cluster.id
   task_definition = aws_ecs_task_definition.task.arn
-  desired_count   = 3
+  desired_count   = var.desired_count
   launch_type     = "FARGATE"
 
   network_configuration {

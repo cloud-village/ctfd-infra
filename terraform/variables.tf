@@ -93,3 +93,7 @@ variable "allow_cloudflare" {
   default     = false
 }
 
+variable "desired_count" {
+  type        = number
+  description = "Number of instances of the task definition to place and keep running"
+}

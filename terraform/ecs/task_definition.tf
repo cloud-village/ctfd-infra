@@ -2,12 +2,17 @@ locals {
   task_family_name = var.task_family_name
 }
 
+data "aws_iam_role" "ecsTaskExecutionRole" {
+  name = "ecsTaskExecutionRole"
+}
+
 resource "aws_ecs_task_definition" "task" {
-  family       = local.task_family_name
-  network_mode = "awsvpc"
-  cpu          = "256"
-  memory       = "512"
+  family             = local.task_family_name
+  network_mode       = "awsvpc"
+  cpu                = "256"
+  memory             = "512"
   execution_role_arn = var.execution_role_arn
+  task_role_arn      = data.aws_iam_role.ecsTaskExecutionRole.arn
 
   container_definitions = jsonencode([
     {

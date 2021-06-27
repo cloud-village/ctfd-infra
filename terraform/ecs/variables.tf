@@ -98,3 +98,8 @@ variable "execution_role_arn" {
   description = "ARN for execution role used by ECS task"
 }
 
+variable "desired_count" {
+  type        = number
+  description = "Number of instances of the task definition to place and keep running"
+  default     = 1
+}

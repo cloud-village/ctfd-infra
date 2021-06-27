@@ -36,6 +36,7 @@ module "ecs" {
   mail_username_arn         = module.iam.s3_access.arn # TODO: ASM? vars? IDK
   mail_password_arn         = module.iam.s3_access.arn # TODO: ASM? vars? IDK
   database_url_arn          = module.mysql_db.db_uri.arn
+  desired_count             = var.desired_count
   workers                   = var.workers
   secret_key                = random_string.secret_key.result
   s3_bucket                 = module.s3_uploads.uploads_bucket.id
