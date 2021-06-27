@@ -62,7 +62,7 @@ resource "aws_secretsmanager_secret_version" "s3_secret" {
 
 # role for ECS
 resource "aws_iam_role" "role" {
-  name = "ctfd-uploads-role"
+  name = "ctfd-secrets-role"
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
@@ -81,8 +81,8 @@ resource "aws_iam_role" "role" {
 
 # IAM policy for ECS to access secrets
 resource "aws_iam_policy" "ctfd_secrets" {
-  name        = "ctfd_asm_access"
-  description = "ctfd role access to secrets in ASM"
+  name        = "ctfd_secrets_access"
+  description = "ctfd role access to secrets in ASM and SSM Parameter Store"
 
   policy = jsonencode({
     Version = "2012-10-17"
@@ -90,10 +90,13 @@ resource "aws_iam_policy" "ctfd_secrets" {
       {
         Action = [
           "secretsmanager:GetSecretValue",
-          "secretsmanager:DescribeSecret"
+          "ssm:GetParameters"
         ]
         Effect   = "Allow"
-        Resource = "arn:aws:secretsmanager:*:${data.aws_caller_identity.current.account_id}:secret:/ctfd/*"
+        Resource = [
+            "arn:aws:secretsmanager:*:${data.aws_caller_identity.current.account_id}:secret:/ctfd/*",
+            "arn:aws:ssm:*:${data.aws_caller_identity.current.account_id}:parameter/ctfd/*"
+        ]
       }
     ]
   })
