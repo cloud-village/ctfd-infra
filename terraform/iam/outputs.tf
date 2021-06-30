@@ -11,8 +11,8 @@ output "ctfd_ecs_policy" {
 }
 
 output "s3_access" {
-  value = aws_secretsmanager_secret.s3_access
+  value = aws_ssm_parameter.s3_access
 }
 output "s3_secret" {
-  value = aws_secretsmanager_secret.s3_secret
+  value = aws_ssm_parameter.s3_secret
 }

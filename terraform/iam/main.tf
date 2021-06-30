@@ -38,27 +38,18 @@ resource "aws_iam_user_policy_attachment" "s3_access_attach" {
   policy_arn = aws_iam_policy.s3_policy.arn
 }
 
-# add s3 access user details to ASM
-resource "aws_secretsmanager_secret" "s3_access" {
-  name = "/ctfd/s3/access"
+# add s3 access user details to SSM
+resource "aws_ssm_parameter" "s3_access" {
+  name  = "/ctfd/s3/access"
+  type  = "SecureString"
+  value = aws_iam_access_key.ctfd.id
 }
 
-resource "aws_secretsmanager_secret_version" "s3_access" {
-  secret_id     = aws_secretsmanager_secret.s3_access.id
-  secret_string = aws_iam_access_key.ctfd.id
-}
-
-resource "aws_secretsmanager_secret" "s3_secret" {
+resource "aws_ssm_parameter" "s3_secret" {
   name = "/ctfd/s3/secret"
+  type = "SecureString"
+  value = aws_iam_access_key.ctfd.secret
 }
-
-resource "aws_secretsmanager_secret_version" "s3_secret" {
-  secret_id     = aws_secretsmanager_secret.s3_secret.id
-  secret_string = aws_iam_access_key.ctfd.secret
-}
-
-
-
 
 # role for ECS
 resource "aws_iam_role" "role" {

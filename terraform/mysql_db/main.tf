@@ -48,13 +48,10 @@ resource "aws_security_group" "allow_mysql" {
   }
 }
 
-resource "aws_secretsmanager_secret" "db_uri" {
-  name = "/ctfd/database/uri"
-}
-
-resource "aws_secretsmanager_secret_version" "db_uri" {
-  secret_id     = aws_secretsmanager_secret.db_uri.id
-  secret_string = "mysql+pymsql://ctfd:${random_password.random.result}@${aws_db_instance.default.endpoint}"
+resource "aws_ssm_parameter" "db_uri" {
+  name  = "/ctfd/db_uri"
+  type  = "SecureString"
+  value = "mysql+pymsql://ctfd:${random_password.random.result}@${aws_db_instance.default.endpoint}"
 }
 
 resource "aws_db_subnet_group" "default" {

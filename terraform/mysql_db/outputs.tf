@@ -1,5 +1,5 @@
 output "db_uri" {
-  value = aws_secretsmanager_secret.db_uri
+  value = aws_ssm_parameter.db_uri
 }
 
 output "db_security_group" {
