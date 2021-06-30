@@ -97,3 +97,9 @@ variable "desired_count" {
   type        = number
   description = "Number of instances of the task definition to place and keep running"
 }
+
+variable "db_subnets" {
+  description = "subnets that the db nodes live in"
+  type        = list(string)
+}
+

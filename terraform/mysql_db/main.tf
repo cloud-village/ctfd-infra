@@ -19,6 +19,7 @@ resource "aws_db_instance" "default" {
   backup_retention_period = 5
   copy_tags_to_snapshot   = true
   skip_final_snapshot     = true
+  db_subnet_group_name    = aws_db_subnet_group.default.id
   vpc_security_group_ids  = [aws_security_group.allow_mysql.id]
 }
 
@@ -56,3 +57,7 @@ resource "aws_secretsmanager_secret_version" "db_uri" {
   secret_string = "mysql+pymsql://ctfd:${random_password.random.result}@${aws_db_instance.default.endpoint}"
 }
 
+resource "aws_db_subnet_group" "default" {
+  name       = "main"
+  subnet_ids = var.db_subnets
+}
