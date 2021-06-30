@@ -46,8 +46,8 @@ resource "aws_ssm_parameter" "s3_access" {
 }
 
 resource "aws_ssm_parameter" "s3_secret" {
-  name = "/ctfd/s3/secret"
-  type = "SecureString"
+  name  = "/ctfd/s3/secret"
+  type  = "SecureString"
   value = aws_iam_access_key.ctfd.secret
 }
 
@@ -79,23 +79,23 @@ resource "aws_iam_policy" "ctfd_ecs_policy" {
     Version = "2012-10-17"
     Statement = [
       {
-        Action = "ssm:GetParameters"
-        Effect = "Allow"
+        Action   = "ssm:GetParameters"
+        Effect   = "Allow"
         Resource = "arn:aws:ssm:${var.region}:${data.aws_caller_identity.current.account_id}:parameter/ctfd/*"
       },
       {
-        Action =  "secretsmanager:GetSecretValue"
-        Effect = "Allow"
+        Action   = "secretsmanager:GetSecretValue"
+        Effect   = "Allow"
         Resource = "arn:aws:secretsmanager:${var.region}:${data.aws_caller_identity.current.account_id}:secret:/ctfd/*"
       },
       {
         Action = [
-                "logs:CreateLogGroup",
-                "logs:CreateLogStream",
-                "logs:PutLogEvents",
-                "logs:DescribeLogStreams"
-            ] 
-        Effect = "Allow"
+          "logs:CreateLogGroup",
+          "logs:CreateLogStream",
+          "logs:PutLogEvents",
+          "logs:DescribeLogStreams"
+        ]
+        Effect   = "Allow"
         Resource = "arn:aws:logs:*:*:*"
       }
     ]
