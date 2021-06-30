@@ -44,7 +44,7 @@ resource "aws_ecs_task_definition" "task" {
       logConfiguration = {
         logDriver = "awslogs"
         options = {
-          awslogs-group         = "/ecs/${local.task_family_name}"
+          awslogs-group         = aws_cloudwatch_log_group.ctfd_logs.name
           awslogs-region        = var.logs_region
           awslogs-stream-prefix = "ecs"
         }

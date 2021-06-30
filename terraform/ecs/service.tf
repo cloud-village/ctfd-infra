@@ -4,10 +4,12 @@ resource "aws_ecs_service" "ctfd" {
   task_definition = aws_ecs_task_definition.task.arn
   desired_count   = var.desired_count
   launch_type     = "FARGATE"
+  platform_version = "1.3.0"
 
   network_configuration {
     subnets         = var.subnets
     security_groups = var.security_groups
+    assign_public_ip = true
   }
 
   load_balancer {
