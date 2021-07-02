@@ -14,6 +14,9 @@ resource "aws_ecs_task_definition" "task" {
   execution_role_arn = var.execution_role_arn
   task_role_arn      = data.aws_iam_role.ecsTaskExecutionRole.arn
 
+  # race conditions FTL, gotta wait to make sure
+  depends_on = [var.ecs_task_depends_on]
+
   container_definitions = jsonencode([
     {
       name      = "ctfd"

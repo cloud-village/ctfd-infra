@@ -56,4 +56,7 @@ module "ecs" {
     module.mysql_db.db_security_group.id
   ]
   subnets = var.ecs_subnets
+
+  # wait for other resources in order to avoid race conditions :lolsob:
+  ecs_task_depends_on       = [module.mysql_db]
 }

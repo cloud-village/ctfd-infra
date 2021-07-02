@@ -103,3 +103,9 @@ variable "desired_count" {
   description = "Number of instances of the task definition to place and keep running"
   default     = 1
 }
+
+variable "ecs_task_depends_on" {
+  type        = any
+  description = "list of resources that have to be created first, avoiding race conditions"
+  default     = null
+}

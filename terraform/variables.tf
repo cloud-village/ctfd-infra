@@ -103,3 +103,8 @@ variable "db_subnets" {
   type        = list(string)
 }
 
+variable "ecs_task_depends_on" {
+  type        = any
+  description = "list of resources that have to be created first, avoiding race conditions"
+  default     = null
+}
