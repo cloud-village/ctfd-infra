@@ -35,8 +35,8 @@ module "ecs" {
   ctfd_version              = var.ctfd_version
   aws_access_key_arn        = module.iam.s3_access.arn
   aws_secret_access_key_arn = module.iam.s3_secret.arn
-  mail_username_arn         = module.iam.s3_access.arn # TODO: ASM? vars? IDK
-  mail_password_arn         = module.iam.s3_access.arn # TODO: ASM? vars? IDK
+  mail_username_arn         = var.mail_username_arn
+  mail_password_arn         = var.mail_password_arn
   database_url_arn          = module.mysql_db.db_uri.arn
   desired_count             = var.desired_count
   workers                   = var.workers

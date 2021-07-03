@@ -108,3 +108,15 @@ variable "ecs_task_depends_on" {
   description = "list of resources that have to be created first, avoiding race conditions"
   default     = null
 }
+
+variable "mail_username_arn" {
+    type = string
+    description = "SSM or ASM ARN for the username used to authenticate to the SMTP server"
+}
+
+variable "mail_password_arn" {
+    type = string
+    description = "SSM or ASM ARN for the username used to authenticate to the SMTP server"
+}
+
+
