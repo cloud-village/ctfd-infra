@@ -51,7 +51,7 @@ resource "aws_security_group" "allow_mysql" {
 resource "aws_ssm_parameter" "db_uri" {
   name  = "/ctfd/db_uri"
   type  = "SecureString"
-  value = "mysql+pymysql://ctfd:${random_password.random.result}@${aws_db_instance.default.endpoint}"
+  value = "mysql+pymysql://ctfd:${random_password.random.result}@${aws_db_instance.default.endpoint}/ctfd"
 }
 
 resource "aws_db_subnet_group" "default" {
