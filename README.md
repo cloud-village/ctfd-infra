@@ -32,3 +32,5 @@ db_subnets    = ["subnet-abc124", "subnet-abc123", "subnet-abc125"]
 ~ `terraform apply -var-files=myvars.tfvars`
 ```
 
+
+NOTE: if you're looking for the older version that ran on VMs, you can find it [here](https://github.com/maxdotdotg/ctfd-infra/tree/ctfd-v2.5.0).
