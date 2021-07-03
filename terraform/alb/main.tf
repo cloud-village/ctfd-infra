@@ -21,7 +21,7 @@ data "http" "cloudflare_ips" {
 resource "aws_lb" "ctfd_alb" {
   internal           = false
   load_balancer_type = "application"
-  security_groups    = [aws_security_group.public_facing.id]
+  security_groups    = [aws_security_group.public_facing.id, aws_security_group.inbound_from_alb.id]
   subnets            = var.subnets
 
   enable_deletion_protection = false
@@ -120,3 +120,31 @@ resource "aws_security_group" "public_facing" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 }
+
+
+# allow inbound traffic from the ALB
+resource "aws_security_group" "inbound_from_alb" {
+  name        = "inbound_from_alb"
+  description = "Allow inbound from ALB"
+  vpc_id      = var.vpc_id
+
+  ingress {
+    description = "inbound from ALB"
+    from_port   = 8000
+    to_port     = 8000
+    protocol    = "tcp"
+    self        = true
+  }
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  tags = {
+    Name = "inbound_from_alb"
+  }
+}
+

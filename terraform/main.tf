@@ -53,10 +53,11 @@ module "ecs" {
   target_group_arn          = module.ctfd_alb.ctfd_target_group.arn
   security_groups = [
     module.redis.redis_security_group.id,
-    module.mysql_db.db_security_group.id
+    module.mysql_db.db_security_group.id,
+    module.ctfd_alb.alb_to_ecs_security_group.id
   ]
   subnets = var.ecs_subnets
 
   # wait for other resources in order to avoid race conditions :lolsob:
-  ecs_task_depends_on       = [module.mysql_db]
+  ecs_task_depends_on = [module.mysql_db]
 }
