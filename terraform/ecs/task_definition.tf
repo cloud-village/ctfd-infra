@@ -39,7 +39,7 @@ resource "aws_ecs_task_definition" "task" {
         { "name" : "MAILFROM_ADDR", "value" : "${var.mailfrom_addr}" },
         { "name" : "MAIL_SERVER", "value" : "${var.mail_server}" },
         { "name" : "MAIL_PORT", "value" : "${var.mail_port}" },
-        { "name" : "REDIS_URL", "value" : "${var.redis_url}" },
+        { "name" : "REDIS_URL", "value" : "redis://${var.redis_url}" },
         { "name" : "UPLOAD_PROVIDER", "value" : "s3" },
         { "name" : "MAIL_USEAUTH", "value" : "true" },
       ],
