@@ -9,3 +9,8 @@ variable "db_subnets" {
 }
 
 
+variable "instance_class" {
+  type        = string
+  description = "database instance class"
+  default     = "db.t3.micro"
+}

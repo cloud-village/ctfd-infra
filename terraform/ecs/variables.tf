@@ -109,3 +109,15 @@ variable "ecs_task_depends_on" {
   description = "list of resources that have to be created first, avoiding race conditions"
   default     = null
 }
+
+variable "cpu" {
+  type        = string
+  description = "CPU units per container instance"
+  default     = "256"
+}
+
+variable "memory" {
+  type        = string
+  description = "MB of memory per container instance"
+  default     = "512"
+}
