@@ -3,7 +3,7 @@
 ![CTFd on AWS](image/04a30368-9e4c-4823-ab2c-787073103c3a_200x200.png)
 
 
-Build yourself some infra to run [`ctfd` v3.3.0](https://github.com/CTFd/CTFd/releases/tag/3.3.0) in AWS.
+Build yourself some serverless infra to run [`ctfd` v3.3.0](https://github.com/CTFd/CTFd/releases/tag/3.3.0) in AWS.
 
 ## Requirements
 - `terraform` (this was built and tested with v0.15.4)
@@ -12,7 +12,7 @@ Build yourself some infra to run [`ctfd` v3.3.0](https://github.com/CTFd/CTFd/re
 
 ## Things To Know
 - This deployment does not support SSL by default. 
-- Secrets are expected to be stored in [SSM Parameter Store](https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-parameter-store.html) or [ASM](https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html) under the path `/ctfd/`
+- Secrets are expected to be stored in [SSM Parameter Store](https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-parameter-store.html) under the path `/ctfd/`.
 
 ## Usage
 Populate your `myvars.tf` file appropriately, then you're ready to go!
