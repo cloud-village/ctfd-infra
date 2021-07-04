@@ -110,13 +110,13 @@ variable "ecs_task_depends_on" {
 }
 
 variable "mail_username_arn" {
-    type = string
-    description = "SSM or ASM ARN for the username used to authenticate to the SMTP server"
+  type        = string
+  description = "SSM or ASM ARN for the username used to authenticate to the SMTP server"
 }
 
 variable "mail_password_arn" {
-    type = string
-    description = "SSM or ASM ARN for the username used to authenticate to the SMTP server"
+  type        = string
+  description = "SSM or ASM ARN for the username used to authenticate to the SMTP server"
 }
 
 
