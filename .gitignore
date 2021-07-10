@@ -2,3 +2,4 @@
 .vagrant/
 *.swp
 terraform.tfstate*
+*.tfvars
