@@ -6,6 +6,7 @@ module "ctfd_alb" { # TODO: update
   ssl_termination_enabled = var.ssl_termination_enabled
   allow_cloudflare        = var.allow_cloudflare
   inbound_ips             = var.inbound_ips
+  certificate_arn         = var.certificate_arn
 }
 
 module "iam" {
