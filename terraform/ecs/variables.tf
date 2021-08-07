@@ -121,3 +121,8 @@ variable "memory" {
   description = "MB of memory per container instance"
   default     = "512"
 }
+
+variable "max_cpu_threshold" {
+    type = string
+    default = "85"
+}

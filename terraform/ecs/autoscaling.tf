@@ -7,5 +7,7 @@ module "ecs-service-autoscaling" {
   ecs_cluster_name = "ctfd-cluster"
   ecs_service_name = aws_ecs_service.ctfd.name
   name_prefix      = "ctfd"
+  scale_target_min_capacity = var.desired_count
+  max_cpu_threshold = var.max_cpu_threshold
 }
 

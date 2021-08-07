@@ -119,4 +119,7 @@ variable "mail_password_arn" {
   description = "SSM or ASM ARN for the username used to authenticate to the SMTP server"
 }
 
-
+variable "max_cpu_threshold" {
+  type    = string
+  default = 85
+}
