@@ -14,3 +14,9 @@ variable "instance_class" {
   description = "database instance class"
   default     = "db.t3.micro"
 }
+
+variable "allocated_storage" {
+  type        = number
+  default     = 10
+  description = "GB of storage for the database"
+}

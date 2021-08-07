@@ -21,9 +21,10 @@ module "s3_uploads" {
 }
 
 module "mysql_db" {
-  source     = "./mysql_db"
-  vpc_id     = var.vpc_id
-  db_subnets = var.db_subnets
+  source            = "./mysql_db"
+  vpc_id            = var.vpc_id
+  db_subnets        = var.db_subnets
+  allocated_storage = var.allocated_storage
 }
 
 module "redis" {

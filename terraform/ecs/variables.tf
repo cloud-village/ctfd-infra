@@ -123,6 +123,6 @@ variable "memory" {
 }
 
 variable "max_cpu_threshold" {
-    type = string
-    default = "85"
+  type    = string
+  default = "85"
 }

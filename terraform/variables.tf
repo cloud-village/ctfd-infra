@@ -123,3 +123,9 @@ variable "max_cpu_threshold" {
   type    = string
   default = 85
 }
+
+variable "allocated_storage" {
+  type        = number
+  default     = 10
+  description = "GB of storage for the database"
+}
