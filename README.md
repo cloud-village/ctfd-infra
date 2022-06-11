@@ -14,6 +14,10 @@ Build yourself some serverless infra to run [`ctfd` v3.3.0](https://github.com/C
 - This deployment does not support SSL by default. 
 - Secrets are expected to be stored in [SSM Parameter Store](https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-parameter-store.html) under the path `/ctfd/`.
 
+## Architecture
+
+![architecture-diagram](image/CTFd-architecture.png)
+
 ## Usage
 Populate your `myvars.tf` file appropriately, then you're ready to go!
 ```
