@@ -3,10 +3,10 @@
 ![CTFd on AWS](image/project-logo.png)
 
 
-Build yourself some serverless infra to run [`ctfd` v3.3.0](https://github.com/CTFd/CTFd/releases/tag/3.3.0) in AWS.
+Build yourself some serverless infra to run [`ctfd`](https://github.com/CTFd/CTFd/) in AWS.
 
 ## Requirements
-- `terraform` (this was built and tested with v0.15.4)
+- [`terraform`](https://www.terraform.io/) (this was built and tested with v1.2.2)
 - VPC and subnets for AWS resources
 - smtp server and credentials, such as [AWS SES](https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-email-smtp.html) or [Mailgun](https://www.mailgun.com/)
 
@@ -36,6 +36,5 @@ mail_username_arn = "arn:aws:ssm:us-east-1:123456789123:parameter/ctfd/mail_user
 
 ~ terraform apply -var-files=myvars.tfvars
 ```
-
 
 NOTE: if you're looking for the older version that ran on VMs, you can find it [here](https://github.com/maxdotdotg/ctfd-infra/tree/ctfd-v2.5.0).
