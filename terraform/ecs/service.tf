@@ -18,5 +18,9 @@ resource "aws_ecs_service" "ctfd" {
     container_port   = 8000
   }
 
+  # Allow changes via autoscaling without appearing in Terraform plan diff
+  lifecycle {
+    ignore_changes = [desired_count]
+  }
 }
 

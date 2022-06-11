@@ -40,7 +40,7 @@ module "ecs" {
   mail_username_arn         = var.mail_username_arn
   mail_password_arn         = var.mail_password_arn
   database_url_arn          = module.mysql_db.db_uri.arn
-  desired_count             = var.desired_count
+  desired_count             = length(var.ecs_subnets)
   workers                   = var.workers
   secret_key                = random_string.secret_key.result
   s3_bucket                 = module.s3_uploads.uploads_bucket.id
@@ -62,4 +62,5 @@ module "ecs" {
 
   # wait for other resources in order to avoid race conditions :lolsob:
   ecs_task_depends_on = [module.mysql_db]
+
 }
