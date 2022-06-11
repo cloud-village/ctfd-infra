@@ -70,11 +70,6 @@ variable "ecs_subnets" {
   description = "subnets used by the ECS service"
 }
 
-variable "logs_region" {
-  type        = string
-  description = "region to store logs"
-}
-
 variable "https_redirect_enabled" {
   type        = bool
   description = "is the https redirect enabled?"

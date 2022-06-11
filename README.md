@@ -25,9 +25,10 @@ mailfrom_addr = "hello@example.com"
 mail_server   = "localhost"
 mail_port     = "25"
 ecs_subnets   = ["subnet-abc124", "subnet-abc123", "subnet-abc125"] 
-logs_region   = "us-east-1"
 desired_count = 1
-db_subnets    = ["subnet-abc124", "subnet-abc123", "subnet-abc125"] 
+db_subnets    = ["subnet-abc124", "subnet-abc123", "subnet-abc125"]
+mail_password_arn = "arn:aws:ssm:us-east-1:123456789123:parameter/ctfd/mail_password"
+mail_username_arn = "arn:aws:ssm:us-east-1:123456789123:parameter/ctfd/mail_username"
 
 ~ `terraform apply -var-files=myvars.tfvars`
 ```
