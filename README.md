@@ -34,7 +34,7 @@ db_subnets    = ["subnet-abc124", "subnet-abc123", "subnet-abc125"]
 mail_password_arn = "arn:aws:ssm:us-east-1:123456789123:parameter/ctfd/mail_password"
 mail_username_arn = "arn:aws:ssm:us-east-1:123456789123:parameter/ctfd/mail_username"
 
-~ `terraform apply -var-files=myvars.tfvars`
+~ terraform apply -var-files=myvars.tfvars
 ```
 
 
