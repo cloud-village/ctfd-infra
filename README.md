@@ -1,6 +1,6 @@
 # CTFd on AWS
 
-![CTFd on AWS](image/04a30368-9e4c-4823-ab2c-787073103c3a_200x200.png)
+![CTFd on AWS](image/project-logo.png)
 
 
 Build yourself some serverless infra to run [`ctfd` v3.3.0](https://github.com/CTFd/CTFd/releases/tag/3.3.0) in AWS.
