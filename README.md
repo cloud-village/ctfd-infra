@@ -1,6 +1,6 @@
 # CTFd on AWS
 
-![CTFd on AWS](image/04a30368-9e4c-4823-ab2c-787073103c3a_200x200.png)
+![CTFd on AWS](image/project-logo.png)
 
 
 Build yourself some serverless infra to run [`ctfd` v3.3.0](https://github.com/CTFd/CTFd/releases/tag/3.3.0) in AWS.
@@ -13,6 +13,10 @@ Build yourself some serverless infra to run [`ctfd` v3.3.0](https://github.com/C
 ## Things To Know
 - This deployment does not support SSL by default. 
 - Secrets are expected to be stored in [SSM Parameter Store](https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-parameter-store.html) under the path `/ctfd/`.
+
+## Architecture
+
+![architecture-diagram](image/CTFd-architecture.png)
 
 ## Usage
 Populate your `myvars.tf` file appropriately, then you're ready to go!
@@ -30,7 +34,7 @@ db_subnets    = ["subnet-abc124", "subnet-abc123", "subnet-abc125"]
 mail_password_arn = "arn:aws:ssm:us-east-1:123456789123:parameter/ctfd/mail_password"
 mail_username_arn = "arn:aws:ssm:us-east-1:123456789123:parameter/ctfd/mail_username"
 
-~ `terraform apply -var-files=myvars.tfvars`
+~ terraform apply -var-files=myvars.tfvars
 ```
 
 
