@@ -35,22 +35,23 @@
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_alb_subnets"></a> [alb\_subnets](#input\_alb\_subnets) | subnet ids the ALB should live in | `list(string)` | n/a | yes |
+| <a name="input_allocated_storage"></a> [allocated\_storage](#input\_allocated\_storage) | GB of storage for the database | `number` | `10` | no |
 | <a name="input_allow_cloudflare"></a> [allow\_cloudflare](#input\_allow\_cloudflare) | is cloudflare being used? | `bool` | `false` | no |
 | <a name="input_certificate_arn"></a> [certificate\_arn](#input\_certificate\_arn) | ARN for the SSL certificate used by the ALB | `string` | `""` | no |
 | <a name="input_create_aws_dns"></a> [create\_aws\_dns](#input\_create\_aws\_dns) | do you want to create DNS entries in route53? | `bool` | `false` | no |
-| <a name="input_ctfd_version"></a> [ctfd\_version](#input\_ctfd\_version) | docker tag for CTFd version | `string` | `"mark-3.3.0"` | no |
+| <a name="input_ctfd_version"></a> [ctfd\_version](#input\_ctfd\_version) | docker tag for CTFd version | `string` | `"mark-3.3.1"` | no |
 | <a name="input_db_subnets"></a> [db\_subnets](#input\_db\_subnets) | subnets that the db nodes live in | `list(string)` | n/a | yes |
 | <a name="input_desired_count"></a> [desired\_count](#input\_desired\_count) | Number of instances of the task definition to place and keep running | `number` | n/a | yes |
 | <a name="input_ecs_subnets"></a> [ecs\_subnets](#input\_ecs\_subnets) | subnets used by the ECS service | `list(string)` | n/a | yes |
 | <a name="input_ecs_task_depends_on"></a> [ecs\_task\_depends\_on](#input\_ecs\_task\_depends\_on) | list of resources that have to be created first, avoiding race conditions | `any` | `null` | no |
 | <a name="input_https_redirect_enabled"></a> [https\_redirect\_enabled](#input\_https\_redirect\_enabled) | is the https redirect enabled? | `bool` | `false` | no |
 | <a name="input_inbound_ips"></a> [inbound\_ips](#input\_inbound\_ips) | list of allowed inbound IP addresses | `list(string)` | <pre>[<br>  "0.0.0.0/0"<br>]</pre> | no |
-| <a name="input_logs_region"></a> [logs\_region](#input\_logs\_region) | region to store logs | `string` | n/a | yes |
 | <a name="input_mail_password_arn"></a> [mail\_password\_arn](#input\_mail\_password\_arn) | SSM or ASM ARN for the username used to authenticate to the SMTP server | `string` | n/a | yes |
 | <a name="input_mail_port"></a> [mail\_port](#input\_mail\_port) | The mail port that emails are sent from if not overriden in the configuration panel. | `string` | n/a | yes |
 | <a name="input_mail_server"></a> [mail\_server](#input\_mail\_server) | The mail server that emails are sent from if not overriden in the configuration panel. | `string` | n/a | yes |
 | <a name="input_mail_username_arn"></a> [mail\_username\_arn](#input\_mail\_username\_arn) | SSM or ASM ARN for the username used to authenticate to the SMTP server | `string` | n/a | yes |
 | <a name="input_mailfrom_addr"></a> [mailfrom\_addr](#input\_mailfrom\_addr) | The email address that emails are sent from if not overridden in the configuration panel. | `string` | n/a | yes |
+| <a name="input_max_cpu_threshold"></a> [max\_cpu\_threshold](#input\_max\_cpu\_threshold) | n/a | `string` | `85` | no |
 | <a name="input_region"></a> [region](#input\_region) | aws region the resources will be created in | `string` | n/a | yes |
 | <a name="input_route53_zone_id"></a> [route53\_zone\_id](#input\_route53\_zone\_id) | hosted zone id | `string` | `""` | no |
 | <a name="input_ssl_termination_enabled"></a> [ssl\_termination\_enabled](#input\_ssl\_termination\_enabled) | is SSL termination enabled? | `bool` | `false` | no |
