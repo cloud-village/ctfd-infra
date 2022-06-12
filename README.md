@@ -16,6 +16,8 @@ Build yourself some serverless infra to run [`ctfd`](https://github.com/CTFd/CTF
 
 ## Architecture
 
+Design choices have been documented and can be found in [`docs/adr`](docs/adr).
+
 ![architecture-diagram](image/CTFd-architecture.png)
 
 ## Usage
