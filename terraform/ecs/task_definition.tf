@@ -2,17 +2,13 @@ locals {
   task_family_name = var.task_family_name
 }
 
-data "aws_iam_role" "ecsTaskExecutionRole" {
-  name = "ecsTaskExecutionRole"
-}
-
 resource "aws_ecs_task_definition" "task" {
   family             = local.task_family_name
   network_mode       = "awsvpc"
   cpu                = var.cpu
   memory             = var.memory
   execution_role_arn = var.execution_role_arn
-  task_role_arn      = data.aws_iam_role.ecsTaskExecutionRole.arn
+  task_role_arn      = aws_iam_role.ecs_task_execution.arn
 
   # race conditions FTL, gotta wait to make sure
   depends_on = [var.ecs_task_depends_on]
