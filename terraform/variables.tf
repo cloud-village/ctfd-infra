@@ -89,8 +89,9 @@ variable "allow_cloudflare" {
 }
 
 variable "desired_count" {
-  type        = number
+  type        = string
   description = "Number of instances of the task definition to place and keep running"
+  default     = ""
 }
 
 variable "db_subnets" {
