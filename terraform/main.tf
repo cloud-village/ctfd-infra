@@ -1,4 +1,4 @@
-module "ctfd_alb" { # TODO: update
+module "ctfd_alb" {
   source                  = "./alb"
   subnets                 = var.alb_subnets
   vpc_id                  = var.vpc_id
@@ -33,14 +33,17 @@ module "redis" {
 }
 
 module "ecs" {
-  source                    = "./ecs"
+  source = "./ecs"
+
+  # choose between desired_count from tfvars or matching the number of available subnets
+  desired_count = coalesce(var.desired_count, length(var.ecs_subnets))
+
   ctfd_version              = var.ctfd_version
   aws_access_key_arn        = module.iam.s3_access.arn
   aws_secret_access_key_arn = module.iam.s3_secret.arn
   mail_username_arn         = var.mail_username_arn
   mail_password_arn         = var.mail_password_arn
   database_url_arn          = module.mysql_db.db_uri.arn
-  desired_count             = length(var.ecs_subnets)
   workers                   = var.workers
   secret_key                = random_string.secret_key.result
   s3_bucket                 = module.s3_uploads.uploads_bucket.id
