@@ -1,5 +1,9 @@
 data "aws_caller_identity" "current" {}
 
+locals {
+  # if name_override is not provided, use "ctfd", else append name_override to "ctfd"
+  name = var.name_override == "" ? "ctfd" : "ctfd-${var.name_override}"
+}
 
 # create a user because app doesn't support roles :grimace:
 resource "aws_iam_access_key" "ctfd" {
@@ -7,12 +11,12 @@ resource "aws_iam_access_key" "ctfd" {
 }
 
 resource "aws_iam_user" "ctfd" {
-  name = "ctfd"
+  name = local.name
 }
 
 # IAM policy to upload files to s3
 resource "aws_iam_policy" "s3_policy" {
-  name        = "ctfd_s3_upload_access"
+  name        = "${local.name}_s3_upload_access"
   path        = "/"
   description = "allow uploads to s3"
 
@@ -42,13 +46,13 @@ resource "aws_iam_user_policy_attachment" "s3_access_attach" {
 
 # add s3 access user details to SSM
 resource "aws_ssm_parameter" "s3_access" {
-  name  = "/ctfd/s3/access"
+  name  = "/${local.name}/s3/access"
   type  = "SecureString"
   value = aws_iam_access_key.ctfd.id
 }
 
 resource "aws_ssm_parameter" "s3_secret" {
-  name  = "/ctfd/s3/secret"
+  name  = "/${local.name}/s3/secret"
   type  = "SecureString"
   value = aws_iam_access_key.ctfd.secret
 }
@@ -83,12 +87,12 @@ resource "aws_iam_policy" "ctfd_ecs_policy" {
       {
         Action   = "ssm:GetParameters"
         Effect   = "Allow"
-        Resource = "arn:aws:ssm:${var.region}:${data.aws_caller_identity.current.account_id}:parameter/ctfd/*"
+        Resource = "arn:aws:ssm:${var.region}:${data.aws_caller_identity.current.account_id}:parameter/${local.name}/*"
       },
       {
         Action   = "secretsmanager:GetSecretValue"
         Effect   = "Allow"
-        Resource = "arn:aws:secretsmanager:${var.region}:${data.aws_caller_identity.current.account_id}:secret:/ctfd/*"
+        Resource = "arn:aws:secretsmanager:${var.region}:${data.aws_caller_identity.current.account_id}:secret:/${local.name}/*"
       },
       {
         Action = [
