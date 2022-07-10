@@ -142,3 +142,9 @@ variable "snapshot_retention_limit" {
   type    = number
   default = 0
 }
+
+variable "env" {
+  type        = string
+  default     = "staging"
+  description = "what environment are these resources being deployed to?"
+}
