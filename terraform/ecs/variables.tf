@@ -126,3 +126,9 @@ variable "max_cpu_threshold" {
   type    = string
   default = "85"
 }
+
+variable "name_override" {
+  type        = string
+  default     = ""
+  description = "a unique prefix for resource names"
+}
