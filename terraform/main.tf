@@ -28,8 +28,9 @@ module "mysql_db" {
 }
 
 module "redis" {
-  source = "./redis"
-  vpc_id = var.vpc_id
+  source                   = "./redis"
+  vpc_id                   = var.vpc_id
+  snapshot_retention_limit = var.snapshot_retention_limit
 }
 
 module "ecs" {
@@ -62,6 +63,8 @@ module "ecs" {
     module.ctfd_alb.alb_to_ecs_security_group.id
   ]
   subnets = var.ecs_subnets
+  memory  = var.memory
+  cpu     = var.cpu
 
   # wait for other resources in order to avoid race conditions :lolsob:
   ecs_task_depends_on = [module.mysql_db]

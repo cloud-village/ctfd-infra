@@ -8,7 +8,7 @@ resource "aws_elasticache_cluster" "cache" {
   port                     = 6379
   security_group_ids       = [aws_security_group.allow_redis.id]
   snapshot_window          = "05:00-09:00"
-  snapshot_retention_limit = 5
+  snapshot_retention_limit = var.snapshot_retention_limit
 }
 
 resource "aws_security_group" "allow_redis" {

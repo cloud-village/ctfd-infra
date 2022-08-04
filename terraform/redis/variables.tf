@@ -8,3 +8,8 @@ variable "vpc_id" {
   type        = string
   description = "the vpc that the redis cluster will live in"
 }
+
+variable "snapshot_retention_limit" {
+  type    = number
+  default = 0
+}
