@@ -125,3 +125,15 @@ variable "allocated_storage" {
   default     = 10
   description = "GB of storage for the database"
 }
+
+variable "cpu" {
+  type        = string
+  description = "CPU units per container instance"
+  default     = "256"
+}
+
+variable "memory" {
+  type        = string
+  description = "MB of memory per container instance"
+  default     = "512"
+}

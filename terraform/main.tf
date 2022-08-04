@@ -62,6 +62,8 @@ module "ecs" {
     module.ctfd_alb.alb_to_ecs_security_group.id
   ]
   subnets = var.ecs_subnets
+  memory  = var.memory
+  cpu     = var.cpu
 
   # wait for other resources in order to avoid race conditions :lolsob:
   ecs_task_depends_on = [module.mysql_db]
