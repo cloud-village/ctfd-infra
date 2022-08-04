@@ -137,3 +137,8 @@ variable "memory" {
   description = "MB of memory per container instance"
   default     = "512"
 }
+
+variable "snapshot_retention_limit" {
+  type    = number
+  default = 0
+}

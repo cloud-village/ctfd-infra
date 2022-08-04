@@ -28,8 +28,9 @@ module "mysql_db" {
 }
 
 module "redis" {
-  source = "./redis"
-  vpc_id = var.vpc_id
+  source                   = "./redis"
+  vpc_id                   = var.vpc_id
+  snapshot_retention_limit = var.snapshot_retention_limit
 }
 
 module "ecs" {
