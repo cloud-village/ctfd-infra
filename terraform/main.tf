@@ -62,9 +62,10 @@ module "ecs" {
     module.mysql_db.db_security_group.id,
     module.ctfd_alb.alb_to_ecs_security_group.id
   ]
-  subnets = var.ecs_subnets
-  memory  = var.memory
-  cpu     = var.cpu
+  subnets              = var.ecs_subnets
+  memory               = var.memory
+  cpu                  = var.cpu
+  nria_license_key_arn = var.nria_license_key_arn
 
   # wait for other resources in order to avoid race conditions :lolsob:
   ecs_task_depends_on = [module.mysql_db]

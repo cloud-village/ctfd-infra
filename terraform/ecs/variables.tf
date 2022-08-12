@@ -1,3 +1,38 @@
+###### NEW RELIC VARS #####
+variable "nria_license_key_arn" {
+  type        = string
+  description = "ARN for New Relic license key"
+}
+
+variable "nria_override_host_root" {
+  description = "Value from New Relic"
+  default     = ""
+}
+
+variable "nria_is_forward_only" {
+  type        = string
+  description = "Value from New Relic"
+  default     = "true"
+}
+
+variable "fargate_nr" {
+  type        = string
+  description = "Value from New Relic"
+  default     = "true"
+}
+
+variable "nria_passthorugh_env" {
+  type        = string
+  description = "Value from New Relic"
+  default     = "ECS_CONTAINER_METADATA_URI,ECS_CONTAINER_METADATA_URI_V4,FARGATE"
+}
+
+variable "nria_custom_attributes" {
+  type        = string
+  description = "Value from New Relic"
+  default     = "{\"nrDeployMethod\":\"downloadPage\"}"
+}
+
 variable "ctfd_version" {
   type        = string
   description = "docker tag for version of CTFd to run"

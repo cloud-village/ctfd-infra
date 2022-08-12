@@ -54,6 +54,33 @@ resource "aws_ecs_task_definition" "task" {
         }
       ]
     },
+    {
+      name      = "newrelic"
+      image     = "newrelic/nri-ecs:1.8.1"
+      essential = true
+
+      "secrets" : [
+        { "name" : "NRIA_LICENSE_KEY", "valueFrom" : var.nria_license_key_arn }
+      ],
+
+      "environment" : [
+        { "name" : "NRIA_OVERRIDE_HOST_ROOT", "value" : "${var.nria_override_host_root}" },
+        { "name" : "NRIA_IS_FORWARD_ONLY", "value" : "${var.nria_is_forward_only}" },
+        { "name" : "FARGATE", "value" : "${var.fargate_nr}" },
+        { "name" : "NRIA_PASSTHROUGH_ENVIRONMENT", "value" : "${var.nria_passthorugh_env}" },
+        { "name" : "NRIA_CUSTOM_ATTRIBUTES", "value" : "${var.nria_custom_attributes}" },
+      ],
+
+      logConfiguration = {
+        logDriver = "awslogs"
+        options = {
+          awslogs-group         = aws_cloudwatch_log_group.ctfd_logs.name
+          awslogs-region        = var.logs_region
+          awslogs-stream-prefix = "ecs"
+        }
+      }
+
+    }
   ])
 
   requires_compatibilities = ["FARGATE"]
@@ -64,5 +91,3 @@ resource "aws_ecs_task_definition" "task" {
   }
 
 }
-
-

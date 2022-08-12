@@ -142,3 +142,8 @@ variable "snapshot_retention_limit" {
   type    = number
   default = 0
 }
+
+variable "nria_license_key_arn" {
+  type        = string
+  description = "ARN for New Relic license key"
+}
