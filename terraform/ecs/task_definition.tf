@@ -57,7 +57,6 @@ resource "aws_ecs_task_definition" "task" {
     {
       name      = "newrelic"
       image     = "newrelic/nri-ecs:1.8.1"
-      essential = true
 
       "secrets" : [
         { "name" : "NRIA_LICENSE_KEY", "valueFrom" : var.nria_license_key_arn }
