@@ -1,4 +1,5 @@
-variable "uploads_bucket_name" {
-  description = "name of the bucket for uploads"
+variable "name_override" {
   type        = string
+  default     = ""
+  description = "a unique prefix for resource names"
 }

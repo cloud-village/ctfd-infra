@@ -16,8 +16,7 @@ module "iam" {
 }
 
 module "s3_uploads" {
-  source              = "./s3_uploads"
-  uploads_bucket_name = "ctfd-uploads-${random_string.bucket_seed.result}"
+  source = "./s3_uploads"
 }
 
 module "mysql_db" {

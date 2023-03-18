@@ -1,9 +1,9 @@
 resource "aws_s3_bucket" "uploads_bucket" {
-  bucket = var.uploads_bucket_name
+  bucket = "${local.name}-${random_string.bucket_seed.result}"
   acl    = "private"
 
   tags = {
-    Name = var.uploads_bucket_name
+    Name = local.name
   }
 }
 
@@ -14,3 +14,7 @@ resource "aws_s3_bucket_public_access_block" "uploads_block" {
   block_public_policy = true
 }
 
+locals {
+  # if name_override is not provided, use "ctfd", else append name_override to "ctfd"
+  name = var.name_override == "" ? "ctfd" : "ctfd-${var.name_override}"
+}
