@@ -20,3 +20,9 @@ variable "allocated_storage" {
   default     = 10
   description = "GB of storage for the database"
 }
+
+variable "name_override" {
+  type        = string
+  default     = ""
+  description = "a unique prefix for resource names"
+}

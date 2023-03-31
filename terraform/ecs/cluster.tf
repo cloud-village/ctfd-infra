@@ -1,5 +1,5 @@
 resource "aws_ecs_cluster" "cluster" {
-  name = "ctfd-cluster"
+  name = "${local.name}-cluster"
 
   setting {
     name  = "containerInsights"

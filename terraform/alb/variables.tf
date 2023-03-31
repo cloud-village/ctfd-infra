@@ -37,3 +37,9 @@ variable "allow_cloudflare" {
   description = "is cloudflare being used?"
   default     = false
 }
+
+variable "name_override" {
+  type        = string
+  default     = ""
+  description = "a unique prefix for resource names"
+}

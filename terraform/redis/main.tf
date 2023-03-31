@@ -1,5 +1,11 @@
+locals {
+  # if name_override is not provided, use "ctfd", else append name_override to "ctfd"
+  name = var.name_override == "" ? "ctfd" : "ctfd-${var.name_override}"
+}
+
+
 resource "aws_elasticache_cluster" "cache" {
-  cluster_id               = "ctfd-cache"
+  cluster_id               = "${local.name}-cache"
   engine                   = "redis"
   node_type                = var.node_type
   num_cache_nodes          = 1
@@ -12,7 +18,7 @@ resource "aws_elasticache_cluster" "cache" {
 }
 
 resource "aws_security_group" "allow_redis" {
-  name        = "allow_redis"
+  name        = "${local.name} allow redis"
   description = "Allow redis inbound traffic"
   vpc_id      = var.vpc_id
 
@@ -32,7 +38,7 @@ resource "aws_security_group" "allow_redis" {
   }
 
   tags = {
-    Name = "allow_redis"
+    Name = "${local.name} allow redis"
   }
 }
 

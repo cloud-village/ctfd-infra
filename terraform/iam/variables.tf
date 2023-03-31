@@ -7,3 +7,9 @@ variable "region" {
   type        = string
   description = "aws region the resources will be created in"
 }
+
+variable "name_override" {
+  type        = string
+  default     = ""
+  description = "a unique prefix for resource names"
+}

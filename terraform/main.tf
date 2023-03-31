@@ -7,17 +7,19 @@ module "ctfd_alb" {
   allow_cloudflare        = var.allow_cloudflare
   inbound_ips             = var.inbound_ips
   certificate_arn         = var.certificate_arn
+  name_override           = var.name_override
 }
 
 module "iam" {
   source              = "./iam"
   uploads_bucket_name = module.s3_uploads.uploads_bucket.id
   region              = var.region
+  name_override       = var.name_override
 }
 
 module "s3_uploads" {
-  source              = "./s3_uploads"
-  uploads_bucket_name = "ctfd-uploads-${random_string.bucket_seed.result}"
+  source        = "./s3_uploads"
+  name_override = var.name_override
 }
 
 module "mysql_db" {
@@ -25,12 +27,14 @@ module "mysql_db" {
   vpc_id            = var.vpc_id
   db_subnets        = var.db_subnets
   allocated_storage = var.allocated_storage
+  name_override     = var.name_override
 }
 
 module "redis" {
   source                   = "./redis"
   vpc_id                   = var.vpc_id
   snapshot_retention_limit = var.snapshot_retention_limit
+  name_override            = var.name_override
 }
 
 module "ecs" {
@@ -62,9 +66,10 @@ module "ecs" {
     module.mysql_db.db_security_group.id,
     module.ctfd_alb.alb_to_ecs_security_group.id
   ]
-  subnets = var.ecs_subnets
-  memory  = var.memory
-  cpu     = var.cpu
+  subnets       = var.ecs_subnets
+  memory        = var.memory
+  cpu           = var.cpu
+  name_override = var.name_override
 
   # wait for other resources in order to avoid race conditions :lolsob:
   ecs_task_depends_on = [module.mysql_db]

@@ -1,9 +1,5 @@
-locals {
-  task_family_name = var.task_family_name
-}
-
 resource "aws_ecs_task_definition" "task" {
-  family             = local.task_family_name
+  family             = local.name
   network_mode       = "awsvpc"
   cpu                = var.cpu
   memory             = var.memory
@@ -59,7 +55,7 @@ resource "aws_ecs_task_definition" "task" {
   requires_compatibilities = ["FARGATE"]
 
   tags = {
-    name         = local.task_family_name
+    name         = local.name
     ctfd_version = var.ctfd_version
   }
 
