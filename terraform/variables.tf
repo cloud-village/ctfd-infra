@@ -148,3 +148,8 @@ variable "env" {
   default     = "staging"
   description = "what environment are these resources being deployed to?"
 }
+
+variable "name_override" {
+  default     = ""
+  description = "a unique prefix for resource names"
+}
