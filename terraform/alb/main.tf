@@ -55,6 +55,7 @@ resource "aws_lb_listener" "https_forward" {
 }
 
 resource "aws_lb_listener" "redirect_http_to_https" {
+  count             = var.https_redirect_enabled ? 1 : 0
   load_balancer_arn = aws_lb.ctfd_alb.arn
   port              = "80"
   protocol          = "HTTP"

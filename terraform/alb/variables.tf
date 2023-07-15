@@ -26,12 +26,6 @@ variable "https_redirect_enabled" {
   default     = false
 }
 
-variable "ssl_termination_enabled" {
-  type        = bool
-  description = "is SSL termination enabled?"
-  default     = false
-}
-
 variable "allow_cloudflare" {
   type        = bool
   description = "is cloudflare being used?"
