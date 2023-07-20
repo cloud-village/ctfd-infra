@@ -1,13 +1,12 @@
 module "ctfd_alb" {
-  source                  = "./alb"
-  subnets                 = var.alb_subnets
-  vpc_id                  = var.vpc_id
-  https_redirect_enabled  = var.https_redirect_enabled
-  ssl_termination_enabled = var.ssl_termination_enabled
-  allow_cloudflare        = var.allow_cloudflare
-  inbound_ips             = var.inbound_ips
-  certificate_arn         = var.certificate_arn
-  name_override           = var.name_override
+  source                 = "./alb"
+  subnets                = var.alb_subnets
+  vpc_id                 = var.vpc_id
+  https_redirect_enabled = var.https_redirect_enabled
+  allow_cloudflare       = var.allow_cloudflare
+  inbound_ips            = var.inbound_ips
+  certificate_arn        = var.certificate_arn
+  name_override          = var.name_override
 }
 
 module "iam" {
