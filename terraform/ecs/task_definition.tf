@@ -14,6 +14,9 @@ resource "aws_ecs_task_definition" "task" {
       name      = "ctfd"
       image     = "ctfd/ctfd:${var.ctfd_version}"
       essential = true
+      linux_parameters = {
+        init_process_enabled = "true"
+      }
 
       "secrets" : [
         { "name" : "AWS_ACCESS_KEY_ID", "valueFrom" : var.aws_access_key_arn },

@@ -5,6 +5,7 @@ resource "aws_ecs_service" "ctfd" {
   desired_count    = var.desired_count
   launch_type      = "FARGATE"
   platform_version = "1.4.0"
+  enable_execute_command  = "true"
 
   network_configuration {
     subnets          = var.subnets
