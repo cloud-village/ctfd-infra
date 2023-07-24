@@ -32,6 +32,7 @@ resource "aws_ecs_task_definition" "task" {
         { "name" : "MAILFROM_ADDR", "value" : "${var.mailfrom_addr}" },
         { "name" : "MAIL_SERVER", "value" : "${var.mail_server}" },
         { "name" : "MAIL_PORT", "value" : "${var.mail_port}" },
+        { "name" : "MAIL_TLS", "value" : tostring(var.mail_tls) },
         { "name" : "MAIL_USEAUTH", "value" : "true" },
         { "name" : "REDIS_URL", "value" : "redis://${var.redis_url}" },
         { "name" : "REVERSE_PROXY", "value" : "true" },

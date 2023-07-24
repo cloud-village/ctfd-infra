@@ -50,6 +50,7 @@
 | <a name="input_mail_password_arn"></a> [mail\_password\_arn](#input\_mail\_password\_arn) | SSM or ASM ARN for the username used to authenticate to the SMTP server | `string` | n/a | yes |
 | <a name="input_mail_port"></a> [mail\_port](#input\_mail\_port) | The mail port that emails are sent from if not overriden in the configuration panel. | `string` | n/a | yes |
 | <a name="input_mail_server"></a> [mail\_server](#input\_mail\_server) | The mail server that emails are sent from if not overriden in the configuration panel. | `string` | n/a | yes |
+| <a name="input_mail_tls"></a> [mail\_tls](#input\_mail\_tls) | Whether to connect to the SMTP server over TLS | `bool` | `"false"` | no |
 | <a name="input_mail_username_arn"></a> [mail\_username\_arn](#input\_mail\_username\_arn) | SSM or ASM ARN for the username used to authenticate to the SMTP server | `string` | n/a | yes |
 | <a name="input_mailfrom_addr"></a> [mailfrom\_addr](#input\_mailfrom\_addr) | The email address that emails are sent from if not overridden in the configuration panel. | `string` | n/a | yes |
 | <a name="input_max_cpu_threshold"></a> [max\_cpu\_threshold](#input\_max\_cpu\_threshold) | n/a | `string` | `85` | no |
