@@ -1,11 +1,11 @@
 resource "aws_ecs_service" "ctfd" {
-  name             = "${local.name}-service"
-  cluster          = aws_ecs_cluster.cluster.id
-  task_definition  = aws_ecs_task_definition.task.arn
-  desired_count    = var.desired_count
-  launch_type      = "FARGATE"
-  platform_version = "1.4.0"
-  enable_execute_command  = "true"
+  name                   = "${local.name}-service"
+  cluster                = aws_ecs_cluster.cluster.id
+  task_definition        = aws_ecs_task_definition.task.arn
+  desired_count          = var.desired_count
+  launch_type            = "FARGATE"
+  platform_version       = "1.4.0"
+  enable_execute_command = "true"
 
   network_configuration {
     subnets          = var.subnets

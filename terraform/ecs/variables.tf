@@ -132,3 +132,9 @@ variable "name_override" {
   default     = ""
   description = "a unique prefix for resource names"
 }
+
+variable "mail_tls" {
+  type        = bool
+  description = "Whether to connect to the SMTP server over TLS"
+  default     = "false"
+}
