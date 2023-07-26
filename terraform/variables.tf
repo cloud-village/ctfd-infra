@@ -40,7 +40,7 @@ variable "inbound_ips" {
 variable "ctfd_version" {
   type        = string
   description = "docker tag for CTFd version"
-  default     = "3.5.1"
+  default     = "3.5.3"
 }
 
 variable "workers" {

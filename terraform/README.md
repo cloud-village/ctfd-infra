@@ -39,7 +39,7 @@
 | <a name="input_certificate_arn"></a> [certificate\_arn](#input\_certificate\_arn) | ARN for the SSL certificate used by the ALB | `string` | `""` | no |
 | <a name="input_cpu"></a> [cpu](#input\_cpu) | CPU units per container instance | `string` | `"256"` | no |
 | <a name="input_create_aws_dns"></a> [create\_aws\_dns](#input\_create\_aws\_dns) | do you want to create DNS entries in route53? | `bool` | `false` | no |
-| <a name="input_ctfd_version"></a> [ctfd\_version](#input\_ctfd\_version) | docker tag for CTFd version | `string` | `"3.5.1"` | no |
+| <a name="input_ctfd_version"></a> [ctfd\_version](#input\_ctfd\_version) | docker tag for CTFd version | `string` | `"3.5.3"` | no |
 | <a name="input_db_subnets"></a> [db\_subnets](#input\_db\_subnets) | subnets that the db nodes live in | `list(string)` | n/a | yes |
 | <a name="input_desired_count"></a> [desired\_count](#input\_desired\_count) | Number of instances of the task definition to place and keep running | `string` | `""` | no |
 | <a name="input_ecs_subnets"></a> [ecs\_subnets](#input\_ecs\_subnets) | subnets used by the ECS service | `list(string)` | n/a | yes |
