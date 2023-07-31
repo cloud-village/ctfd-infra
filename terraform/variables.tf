@@ -153,3 +153,9 @@ variable "mail_tls" {
   description = "Whether to connect to the SMTP server over TLS"
   default     = "false"
 }
+
+variable "instance_class" {
+  type        = string
+  description = "database instance class"
+  default     = "db.t3.micro"
+}
