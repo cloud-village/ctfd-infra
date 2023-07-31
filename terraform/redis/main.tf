@@ -10,7 +10,7 @@ resource "aws_elasticache_cluster" "cache" {
   node_type                = var.node_type
   num_cache_nodes          = 1
   parameter_group_name     = "default.redis3.2"
-  engine_version           = "3.2.10"
+  engine_version           = var.engine_version
   port                     = 6379
   security_group_ids       = [aws_security_group.allow_redis.id]
   snapshot_window          = "05:00-09:00"
