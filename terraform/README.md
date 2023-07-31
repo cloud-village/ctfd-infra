@@ -47,6 +47,7 @@
 | <a name="input_env"></a> [env](#input\_env) | what environment are these resources being deployed to? | `string` | `"staging"` | no |
 | <a name="input_https_redirect_enabled"></a> [https\_redirect\_enabled](#input\_https\_redirect\_enabled) | is the https redirect enabled? | `bool` | `false` | no |
 | <a name="input_inbound_ips"></a> [inbound\_ips](#input\_inbound\_ips) | list of allowed inbound IP addresses | `list(string)` | <pre>[<br>  "0.0.0.0/0"<br>]</pre> | no |
+| <a name="input_instance_class"></a> [instance\_class](#input\_instance\_class) | database instance class | `string` | `"db.t3.micro"` | no |
 | <a name="input_mail_password_arn"></a> [mail\_password\_arn](#input\_mail\_password\_arn) | SSM or ASM ARN for the username used to authenticate to the SMTP server | `string` | n/a | yes |
 | <a name="input_mail_port"></a> [mail\_port](#input\_mail\_port) | The mail port that emails are sent from if not overriden in the configuration panel. | `string` | n/a | yes |
 | <a name="input_mail_server"></a> [mail\_server](#input\_mail\_server) | The mail server that emails are sent from if not overriden in the configuration panel. | `string` | n/a | yes |

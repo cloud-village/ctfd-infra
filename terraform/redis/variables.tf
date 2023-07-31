@@ -19,3 +19,9 @@ variable "name_override" {
   default     = ""
   description = "a unique prefix for resource names"
 }
+
+variable "engine_version" {
+  default     = "7.0"
+  type        = string
+  description = "version of redis to use"
+}

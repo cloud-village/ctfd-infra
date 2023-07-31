@@ -27,6 +27,7 @@ module "mysql_db" {
   db_subnets        = var.db_subnets
   allocated_storage = var.allocated_storage
   name_override     = var.name_override
+  instance_class    = var.instance_class
 }
 
 module "redis" {
