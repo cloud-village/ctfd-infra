@@ -35,7 +35,7 @@ resource "aws_ecs_task_definition" "task" {
         { "name" : "MAIL_TLS", "value" : tostring(var.mail_tls) },
         { "name" : "MAIL_USEAUTH", "value" : "true" },
         { "name" : "REDIS_URL", "value" : "redis://${var.redis_url}" },
-        { "name" : "REVERSE_PROXY", "value" : "true" },
+        { "name" : "REVERSE_PROXY", "value" : "True" },
         { "name" : "SECRET_KEY", "value" : "${var.secret_key}" },
         { "name" : "UPLOAD_PROVIDER", "value" : "s3" },
         { "name" : "WORKERS", "value" : "${var.workers}" },
