@@ -21,7 +21,7 @@ variable "name_override" {
 }
 
 variable "engine_version" {
-  default     = "7.0"
+  default     = "4.0.10"
   type        = string
   description = "version of redis to use"
 }
