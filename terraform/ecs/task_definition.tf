@@ -1,3 +1,10 @@
+data "aws_caller_identity" "current" {}
+
+locals {
+  ecr_repo = "${data.aws_caller_identity.current.account_id}.dkr.ecr.${var.ecr_region}.amazonaws.com/${var.ecr_repo_name}:${var.ecr_tag}"
+  image    = var.use_ecr == "" ? "ctfd/ctfd:${var.ctfd_version}" : local.ecr_repo
+}
+
 resource "aws_ecs_task_definition" "task" {
   family             = local.name
   network_mode       = "awsvpc"
@@ -12,7 +19,7 @@ resource "aws_ecs_task_definition" "task" {
   container_definitions = jsonencode([
     {
       name      = "ctfd"
-      image     = "ctfd/ctfd:${var.ctfd_version}"
+      image     = local.image
       essential = true
       linux_parameters = {
         init_process_enabled = "true"
@@ -63,7 +70,4 @@ resource "aws_ecs_task_definition" "task" {
     name         = local.name
     ctfd_version = var.ctfd_version
   }
-
 }
-
-

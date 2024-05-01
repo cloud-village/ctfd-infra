@@ -113,3 +113,33 @@ resource "aws_iam_role_policy_attachment" "attach" {
   policy_arn = aws_iam_policy.ctfd_ecs_policy.arn
 }
 
+# allow read access to ECR
+data "aws_iam_policy_document" "ecr_read" {
+  # only create if using ECR
+  count = var.use_ecr ? 1 : 0
+  statement {
+    sid    = "ECRRead"
+    effect = "Allow"
+    actions = [
+      "ecr:BatchGetImage",
+      "ecr:GetDownloadUrlForLayer",
+      "ecr:GetAuthorizationToken"
+    ]
+    resources = ["*"]
+  }
+}
+
+resource "aws_iam_policy" "ecs_use_ecr" {
+  # only create if using ECR
+  count       = var.use_ecr ? 1 : 0
+  name        = "${local.name}-use-ecr"
+  description = "get containers from ECR"
+  policy      = data.aws_iam_policy_document.ecr_read[0].json
+}
+
+resource "aws_iam_role_policy_attachment" "ecs_use_ecr" {
+  # only create if using ECR
+  count      = var.use_ecr ? 1 : 0
+  role       = aws_iam_role.role.name
+  policy_arn = aws_iam_policy.ecs_use_ecr[0].arn
+}

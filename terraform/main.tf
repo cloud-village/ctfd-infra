@@ -14,6 +14,11 @@ module "iam" {
   uploads_bucket_name = module.s3_uploads.uploads_bucket.id
   region              = var.region
   name_override       = var.name_override
+
+  # ECR configs
+  use_ecr       = var.use_ecr
+  ecr_repo_name = var.ecr_repo_name
+  ecr_region    = var.ecr_region
 }
 
 module "s3_uploads" {
@@ -71,6 +76,12 @@ module "ecs" {
   memory        = var.memory
   cpu           = var.cpu
   name_override = var.name_override
+
+  # ECR configs
+  use_ecr       = var.use_ecr
+  ecr_repo_name = var.ecr_repo_name
+  ecr_region    = var.ecr_region
+  ecr_tag       = var.ecr_tag
 
   # wait for other resources in order to avoid race conditions :lolsob:
   ecs_task_depends_on = [module.mysql_db]

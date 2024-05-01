@@ -159,3 +159,27 @@ variable "instance_class" {
   description = "database instance class"
   default     = "db.t3.micro"
 }
+
+variable "use_ecr" {
+  type        = bool
+  description = "whether to use ECR"
+  default     = "false"
+}
+
+variable "ecr_region" {
+  type        = string
+  description = "region for ECR repo"
+  default     = ""
+}
+
+variable "ecr_repo_name" {
+  type        = string
+  description = "name of the ECR repo used"
+  default     = ""
+}
+
+variable "ecr_tag" {
+  type        = string
+  description = "desired image tag from ECR repo"
+  default     = ""
+}
