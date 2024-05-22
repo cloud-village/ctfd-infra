@@ -1,4 +1,4 @@
-# 1. Adding support for ECR
+# 3. Adding support for ECR
 
 Date: May 21, 2024
 
