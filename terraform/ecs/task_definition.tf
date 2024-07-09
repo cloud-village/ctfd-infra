@@ -2,7 +2,7 @@ data "aws_caller_identity" "current" {}
 
 locals {
   ecr_repo = "${data.aws_caller_identity.current.account_id}.dkr.ecr.${var.ecr_region}.amazonaws.com/${var.ecr_repo_name}:${var.ecr_tag}"
-  image    = var.use_ecr == "" ? "ctfd/ctfd:${var.ctfd_version}" : local.ecr_repo
+  image    = var.use_ecr == false ? "ctfd/ctfd:${var.ctfd_version}" : local.ecr_repo
 }
 
 resource "aws_ecs_task_definition" "task" {
