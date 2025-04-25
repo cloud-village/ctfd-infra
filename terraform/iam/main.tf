@@ -28,6 +28,7 @@ resource "aws_iam_policy" "s3_policy" {
           "s3:Put*",
           "s3:Get*",
           "s3:List*",
+          "s3:DeleteObject"
         ]
         Effect = "Allow"
         Resource = [
