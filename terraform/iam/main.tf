@@ -60,7 +60,7 @@ resource "aws_ssm_parameter" "s3_secret" {
 
 # role for ECS
 resource "aws_iam_role" "role" {
-  name = "ctfd-secrets-role"
+  name = "${local.name}-ctfd-secrets-role"
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
@@ -79,7 +79,7 @@ resource "aws_iam_role" "role" {
 
 # IAM policy for ECS task
 resource "aws_iam_policy" "ctfd_ecs_policy" {
-  name        = "ctfd_ecs_policy"
+  name        = "${local.name}_ctfd_ecs_policy"
   description = "provide CTFd in ECS access to ASM, SSM Parameter Store, and logs"
 
   policy = jsonencode({
