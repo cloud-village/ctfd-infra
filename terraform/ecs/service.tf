@@ -23,5 +23,9 @@ resource "aws_ecs_service" "ctfd" {
   lifecycle {
     ignore_changes = [desired_count]
   }
+
+  triggers = {
+    redeployment = plantimestamp()
+  }
 }
 
