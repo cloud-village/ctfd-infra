@@ -12,6 +12,7 @@ resource "aws_elasticache_cluster" "cache" {
   parameter_group_name     = "default.redis${substr(var.engine_version, 0, 3)}"
   engine_version           = var.engine_version
   port                     = 6379
+  subnet_group_name        = aws_elasticache_subnet_group.ctfd.name
   security_group_ids       = [aws_security_group.allow_redis.id]
   snapshot_window          = "05:00-09:00"
   snapshot_retention_limit = var.snapshot_retention_limit
@@ -42,3 +43,7 @@ resource "aws_security_group" "allow_redis" {
   }
 }
 
+resource "aws_elasticache_subnet_group" "ctfd" {
+  name       = "${local.name}-cache-subnet-group"
+  subnet_ids = var.subnets
+}

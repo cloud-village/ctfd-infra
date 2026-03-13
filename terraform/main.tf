@@ -40,6 +40,7 @@ module "redis" {
   vpc_id                   = var.vpc_id
   snapshot_retention_limit = var.snapshot_retention_limit
   name_override            = var.name_override
+  subnets                  = var.cache_subnets
 }
 
 module "ecs" {

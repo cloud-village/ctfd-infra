@@ -25,3 +25,8 @@ variable "engine_version" {
   type        = string
   description = "version of redis to use"
 }
+
+variable "subnets" {
+  type        = list(string)
+  description = "list of subnet IDs where the cache can be provisioned"
+}

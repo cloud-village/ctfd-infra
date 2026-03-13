@@ -183,3 +183,8 @@ variable "ecr_tag" {
   description = "desired image tag from ECR repo"
   default     = ""
 }
+
+variable "cache_subnets" {
+  type        = list(string)
+  description = "list of subnet IDs where the cache can be provisioned"
+}
