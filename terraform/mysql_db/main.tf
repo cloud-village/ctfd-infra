@@ -16,12 +16,12 @@ resource "random_password" "random" {
 resource "aws_db_instance" "default" {
   allocated_storage       = var.allocated_storage
   engine                  = "mysql"
-  engine_version          = "5.7"
+  engine_version          = "8.0"
   instance_class          = var.instance_class
   db_name                 = replace(local.name, "-", "")
   username                = "ctfd"
   password                = random_password.random.result
-  parameter_group_name    = "default.mysql5.7"
+  parameter_group_name    = "default.mysql8.0"
   backup_retention_period = 5
   copy_tags_to_snapshot   = true
   skip_final_snapshot     = true
