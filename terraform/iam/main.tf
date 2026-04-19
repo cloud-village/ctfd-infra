@@ -47,15 +47,17 @@ resource "aws_iam_user_policy_attachment" "s3_access_attach" {
 
 # add s3 access user details to SSM
 resource "aws_ssm_parameter" "s3_access" {
-  name  = "/${local.name}/s3/access"
-  type  = "SecureString"
-  value = aws_iam_access_key.ctfd.id
+  name      = "/${local.name}/s3/access"
+  type      = "SecureString"
+  value     = aws_iam_access_key.ctfd.id
+  overwrite = true
 }
 
 resource "aws_ssm_parameter" "s3_secret" {
-  name  = "/${local.name}/s3/secret"
-  type  = "SecureString"
-  value = aws_iam_access_key.ctfd.secret
+  name      = "/${local.name}/s3/secret"
+  type      = "SecureString"
+  value     = aws_iam_access_key.ctfd.secret
+  overwrite = true
 }
 
 # role for ECS
