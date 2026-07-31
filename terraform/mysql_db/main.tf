@@ -15,15 +15,13 @@ resource "random_password" "random" {
 
 resource "aws_db_instance" "default" {
   allocated_storage       = var.allocated_storage
-  engine                  = "mysql"
-  engine_version          = "8.0"
+  engine                  = "mariadb"
+  engine_version          = "10.11"
   instance_class          = var.instance_class
   db_name                 = replace(local.name, "-", "")
   username                = "ctfd"
   password                = random_password.random.result
-  parameter_group_name    = "default.mysql8.0"
   backup_retention_period = 5
-  copy_tags_to_snapshot   = true
   skip_final_snapshot     = true
   db_subnet_group_name    = aws_db_subnet_group.default.id
   vpc_security_group_ids  = [aws_security_group.allow_mysql.id]
